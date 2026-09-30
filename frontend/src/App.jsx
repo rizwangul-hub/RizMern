@@ -1,6 +1,7 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
+import mobileLoadingImage from './assets/mobile.png'
 import SiteLayout from './layouts/SiteLayout'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -27,11 +28,41 @@ function RouteFallback() {
   return <div className="route-loading" role="status" aria-live="polite">Loading RizMern…</div>
 }
 
+function MobileLoadingScreen() {
+  const [visible, setVisible] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 760px)').matches)
+  const [exiting, setExiting] = useState(false)
+
+  useEffect(() => {
+    if (!visible) return undefined
+
+    const exitTimer = window.setTimeout(() => {
+      setExiting(true)
+    }, 1600)
+    const removeTimer = window.setTimeout(() => {
+      setVisible(false)
+    }, 1900)
+
+    return () => {
+      window.clearTimeout(exitTimer)
+      window.clearTimeout(removeTimer)
+    }
+  }, [visible])
+
+  if (!visible) return null
+
+  return (
+    <div className={`mobile-loading-screen${exiting ? ' is-exiting' : ''}`} role="status" aria-live="polite">
+      <img src={mobileLoadingImage} alt="RizMern is loading. Your journey to modern web and app development starts here." fetchPriority="high" />
+    </div>
+  )
+}
+
 export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <AuthProvider>
+          <MobileLoadingScreen />
           <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route element={<SiteLayout />}>

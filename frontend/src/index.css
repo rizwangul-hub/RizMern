@@ -265,6 +265,15 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .not-found-page > p { max-width: 580px; margin: 0; color: #a0a2b6; font-size: 11px; line-height: 1.8; }
 .not-found-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .route-loading { position: relative; z-index: 1; display: grid; min-height: 50vh; place-items: center; color: #aaa4c5; font-size: 11px; }
+.mobile-loading-screen { display: none; }
+@media (max-width: 760px) {
+  .mobile-loading-screen { position: fixed; inset: 0; z-index: 1000; display: block; overflow: hidden; background: #030a1a; opacity: 1; transition: opacity .3s ease; }
+  .mobile-loading-screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .mobile-loading-screen.is-exiting { opacity: 0; pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-loading-screen { transition-duration: .01ms; }
+}
 .scroll-reveal { opacity: 0; transform: translate3d(0, 22px, 0); transition: opacity .5s ease var(--reveal-delay, 0s), transform .5s cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0s); }
 .scroll-reveal--visible { opacity: 1; transform: none; }
 .hm-hero-enter { animation: hm-hero-enter .55s cubic-bezier(.22, 1, .36, 1) both; }
