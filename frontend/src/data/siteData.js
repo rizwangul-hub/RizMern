@@ -18,7 +18,7 @@ export const siteData = {
   whatsappLink: `https://wa.me/${whatsappNumber}`,
   whatsappGroupLink: 'https://chat.whatsapp.com/Hg61usPuMv25DW9cJKK0dR?s=cl&p=a&mlu=4&ilr=4&iam=0',
   whatsappPrefilledMessage: 'Hello Rizwan, I want to know about the MERN course',
-  email: 'hello@rizmern.com',
+  email: 'mernstack2426@gmail.com',
   timings: 'TBA',
 }
 
