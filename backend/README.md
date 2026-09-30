@@ -59,6 +59,14 @@ npm run seed:admin
 
 The seed command does not overwrite an existing admin. There is no public admin signup endpoint. Admin passwords are hashed with bcrypt and are excluded from normal Mongoose queries.
 
+Seed Rizwan's initial portfolio projects after configuring `MONGO_URI`:
+
+```powershell
+npm run seed:projects
+```
+
+This inserts the 22 supplied projects once and leaves existing project records (including admin edits) unchanged when run again. Manage projects from **Admin → Projects** after signing in.
+
 ## Response format
 
 Successful and failed API responses use:
@@ -90,6 +98,10 @@ All routes are prefixed with `/api`.
   "data": { "status": "ok" }
 }
 ```
+
+#### `GET /api/projects`
+
+Returns published portfolio projects ordered with featured items first. Project management endpoints are protected by admin authentication.
 
 #### `POST /api/leads`
 

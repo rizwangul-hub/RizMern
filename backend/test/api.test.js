@@ -1,5 +1,6 @@
 const { after, before, test } = require('node:test')
 const assert = require('node:assert/strict')
+const jwt = require('jsonwebtoken')
 
 process.env.NODE_ENV = 'test'
 process.env.JWT_SECRET = 'test-only-secret-that-is-long-enough-to-sign-jwt-tokens'
@@ -8,6 +9,8 @@ process.env.CLIENT_URL = 'http://allowed.test,https://www.rizmern.com,https://ri
 const Lead = require('../src/models/Lead')
 const Admission = require('../src/models/Admission')
 const Admin = require('../src/models/Admin')
+const Project = require('../src/models/Project')
+const seededProjects = require('../src/data/projects')
 const app = require('../src/app')
 
 const originals = {
@@ -22,6 +25,11 @@ const originals = {
   admissionCount: Admission.countDocuments,
   admissionUpdate: Admission.findByIdAndUpdate,
   admissionDelete: Admission.findByIdAndDelete,
+  projectFind: Project.find,
+  projectCount: Project.countDocuments,
+  projectCreate: Project.create,
+  projectUpdate: Project.findByIdAndUpdate,
+  projectDelete: Project.findByIdAndDelete,
   adminFindOne: Admin.findOne,
   adminFindById: Admin.findById,
 }
@@ -30,6 +38,7 @@ let server
 let baseUrl
 let hasDuplicateLead = false
 let lastLeadUpdates
+let lastProjectUpdates
 const fakeAdmin = {
   id: '64b64c3f4f24c00123456789',
   _id: '64b64c3f4f24c00123456789',
@@ -59,6 +68,20 @@ const fakeAdmission = {
   status: 'pending',
   notes: '',
   createdAt: new Date('2026-09-30T10:00:00.000Z'),
+}
+const fakeProject = {
+  _id: '64b64c3f4f24c00123456782',
+  id: '64b64c3f4f24c00123456782',
+  title: 'Portfolio Project',
+  slug: 'portfolio-project',
+  category: 'Full Stack',
+  imageUrl: 'https://example.com/project.png',
+  liveUrl: 'https://example.com',
+  technologies: ['React', 'Node.js'],
+  description: 'A test portfolio project.',
+  order: 1,
+  featured: true,
+  published: true,
 }
 
 function fakeQuery(value) {
@@ -102,6 +125,14 @@ before(async () => {
   }
   Admission.findByIdAndUpdate = async (_id, updates) => ({ ...fakeAdmission, ...updates.$set })
   Admission.findByIdAndDelete = async () => fakeAdmission
+  Project.find = () => fakeQuery([fakeProject])
+  Project.countDocuments = async () => 1
+  Project.create = async (payload) => ({ ...fakeProject, ...payload })
+  Project.findByIdAndUpdate = async (_id, updates) => {
+    lastProjectUpdates = updates
+    return { ...fakeProject, ...updates.$set }
+  }
+  Project.findByIdAndDelete = async () => fakeProject
 
   Admin.findOne = () => ({ select: () => Promise.resolve(fakeAdmin) })
   Admin.findById = () => ({ select: () => Promise.resolve(fakeAdmin) })
@@ -125,8 +156,67 @@ after(async () => {
   Admission.countDocuments = originals.admissionCount
   Admission.findByIdAndUpdate = originals.admissionUpdate
   Admission.findByIdAndDelete = originals.admissionDelete
+  Project.find = originals.projectFind
+  Project.countDocuments = originals.projectCount
+  Project.create = originals.projectCreate
+  Project.findByIdAndUpdate = originals.projectUpdate
+  Project.findByIdAndDelete = originals.projectDelete
   Admin.findOne = originals.adminFindOne
   Admin.findById = originals.adminFindById
+})
+
+test('portfolio projects are public to read and protected to manage', async () => {
+  assert.equal(seededProjects.length, 22)
+  assert.equal(seededProjects.some(({ liveUrl }) => /localhost|127\.0\.0\.1/i.test(liveUrl)), false)
+
+  const publicProjects = await request('/api/projects')
+  assert.equal(publicProjects.status, 200)
+  assert.equal(publicProjects.body.data[0].title, fakeProject.title)
+
+  assert.equal((await request('/api/projects/admin')).status, 401)
+  const token = jwt.sign({ sub: fakeAdmin.id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+
+  const adminProjects = await request('/api/projects/admin?page=1&limit=12', { token })
+  assert.equal(adminProjects.status, 200)
+  assert.equal(adminProjects.body.data.pagination.total, 1)
+
+  const created = await request('/api/projects', {
+    method: 'POST',
+    token,
+    body: {
+      title: 'New project',
+      category: 'Full Stack',
+      imageUrl: 'https://example.com/image.png',
+      liveUrl: '',
+      technologies: ['React', ' React '],
+      description: 'Project description',
+    },
+  })
+  assert.equal(created.status, 201)
+  assert.deepEqual(created.body.data.technologies, ['React'])
+
+  const invalidUrl = await request('/api/projects', {
+    method: 'POST',
+    token,
+    body: {
+      title: 'Invalid project',
+      category: 'Frontend',
+      imageUrl: 'javascript:alert(1)',
+      technologies: ['HTML'],
+      description: 'Project description',
+    },
+  })
+  assert.equal(invalidUrl.status, 422)
+
+  const updated = await request(`/api/projects/${fakeProject._id}`, {
+    method: 'PATCH',
+    token,
+    body: { title: 'Updated project', liveUrl: '' },
+  })
+  assert.equal(updated.status, 200)
+  assert.equal(lastProjectUpdates.$set.slug, 'updated-project')
+  assert.equal(updated.body.data.liveUrl, '')
+  assert.equal((await request(`/api/projects/${fakeProject._id}`, { method: 'DELETE', token })).status, 200)
 })
 
 test('health, public validation, duplicate prevention, and CORS', async () => {

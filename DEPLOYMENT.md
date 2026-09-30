@@ -62,6 +62,7 @@ This guide deploys the React/Vite frontend to Vercel, the Express API to Render,
 5. Deploy and verify the service URL responds with `{"message":"RizMern API running"}` at `/` and `{"status":"ok"}` under `data` at `/api/health`.
 6. Add the custom API domain `api.rizmern.com` in Render's custom-domain settings. Render will show the DNS target to configure with Hostinger.
 7. Seed the first admin once, after deployment and database connection. Run `npm run seed:admin` from the backend service shell or a one-off job using the same environment variables. Do not run this on every deploy.
+8. Load the initial portfolio into MongoDB once by running `npm run seed:projects` from the backend service shell or a one-off job. This adds the 22 supplied projects without overwriting projects that already exist.
 
 ## 4. Deploy the frontend on Vercel
 

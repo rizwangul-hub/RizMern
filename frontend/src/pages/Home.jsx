@@ -6,6 +6,7 @@ import InstructorSection from '../sections/InstructorSection'
 import JourneySection from '../sections/JourneySection'
 import LearnSection from '../sections/LearnSection'
 import ProjectsSection from '../sections/ProjectsSection'
+import PortfolioSection from '../sections/PortfolioSection'
 import StatsSection from '../sections/StatsSection'
 import TeachingSection from '../sections/TeachingSection'
 import SEO from '../components/SEO'
@@ -36,6 +37,7 @@ export default function Home() {
       <LearnSection />
       <TeachingSection />
       <ProjectsSection />
+      <PortfolioSection />
       <JourneySection />
       <InstructorSection />
       <DemoSection />

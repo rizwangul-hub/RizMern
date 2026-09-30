@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import Button from '../../components/Button'
 import SEO from '../../components/SEO'
 import useAuth from '../../context/useAuth'
+import logo from '../../assets/logo.png'
 
 export default function AdminLoginPage() {
   const { admin, loading, login } = useAuth()
@@ -38,7 +39,7 @@ export default function AdminLoginPage() {
     <main className="admin-login-page">
       <SEO title="Admin Login | RizMern" description="Private sign-in for RizMern administrators." path="/admin/login" noindex />
       <section className="admin-login-card" aria-labelledby="admin-login-heading">
-        <a className="admin-brand admin-login-brand" href="/">Riz<span>Mern</span><i>.</i></a>
+        <a className="admin-brand admin-login-brand" href="/"><img src={logo} alt="RizMern" className="brand-logo" /></a>
         <div className="admin-login-icon"><LockKeyhole size={23} /></div>
         <p className="eyebrow">Secure workspace</p>
         <h1 id="admin-login-heading">Admin login</h1>

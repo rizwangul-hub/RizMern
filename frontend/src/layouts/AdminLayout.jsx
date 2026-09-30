@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { LayoutDashboard, LogOut, Menu, Users, UserRoundCheck, X } from 'lucide-react'
+import { BriefcaseBusiness, LayoutDashboard, LogOut, Menu, Users, UserRoundCheck, X } from 'lucide-react'
 import { Toaster } from 'react-hot-toast'
 import useAuth from '../context/useAuth'
 import SEO from '../components/SEO'
+import logo from '../assets/logo.png'
 
 const links = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/admin/leads', label: 'Demo Leads', icon: Users },
   { to: '/admin/admissions', label: 'Admissions', icon: UserRoundCheck },
+  { to: '/admin/projects', label: 'Projects', icon: BriefcaseBusiness },
 ]
 
 export default function AdminLayout() {
@@ -26,7 +28,7 @@ export default function AdminLayout() {
         onClick={() => setDrawerOpen(false)}
       />
       <aside className={`admin-sidebar${drawerOpen ? ' is-open' : ''}`} aria-label="Admin navigation">
-        <div className="admin-brand"><span>Riz</span>Mern<i>.</i><button type="button" className="admin-close" aria-label="Close navigation" onClick={() => setDrawerOpen(false)}><X size={19} /></button></div>
+        <div className="admin-brand"><img src={logo} alt="RizMern" className="brand-logo" /><button type="button" className="admin-close" aria-label="Close navigation" onClick={() => setDrawerOpen(false)}><X size={19} /></button></div>
         <div className="admin-sidebar-label">Workspace</div>
         <nav>
           {links.map(({ to, label, icon: Icon, end }) => (
@@ -42,7 +44,7 @@ export default function AdminLayout() {
       <div className="admin-main">
         <header className="admin-topbar">
           <button type="button" className="admin-menu-button" aria-label="Open admin navigation" aria-expanded={drawerOpen} onClick={() => setDrawerOpen(true)}><Menu size={21} /></button>
-          <span className="admin-topbar-title">RizMern Admin</span>
+          <span className="admin-topbar-title"><img src={logo} alt="RizMern" className="brand-logo brand-logo--topbar" /> Admin</span>
           <span className="admin-user-chip"><span className="admin-user-avatar">{admin?.name?.slice(0, 1)?.toUpperCase() || 'A'}</span>{admin?.name}</span>
         </header>
         <main className="admin-content"><Outlet /></main>

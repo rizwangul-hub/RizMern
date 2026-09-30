@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { navigationLinks } from '../data/siteData'
 import useEscapeKey from '../hooks/useEscapeKey'
 import Button from './Button'
+import logo from '../assets/logo.png'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -13,7 +14,7 @@ export default function Navbar() {
     <header className="site-header">
       <nav className="navbar page-container" aria-label="Main navigation">
         <Link className="brand" to="/" aria-label="RizMern home">
-          Riz<span>Mern</span><i>.</i>
+          <img src={logo} alt="RizMern" className="brand-logo" />
         </Link>
         <div className="nav-links">
           {navigationLinks.map((link) => (

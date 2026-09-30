@@ -14,12 +14,14 @@ const AdmissionPage = lazy(() => import('./pages/AdmissionPage'))
 const ThankYouPage = lazy(() => import('./pages/ThankYouPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
 const AdminLayout = lazy(() => import('./layouts/AdminLayout'))
 const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage'))
 const AdminLeadsPage = lazy(() => import('./pages/admin/AdminLeadsPage'))
 const AdminAdmissionsPage = lazy(() => import('./pages/admin/AdminAdmissionsPage'))
+const AdminProjectsPage = lazy(() => import('./pages/admin/AdminProjectsPage'))
 
 function RouteFallback() {
   return <div className="route-loading" role="status" aria-live="polite">Loading RizMern…</div>
@@ -42,6 +44,7 @@ export default function App() {
                 <Route path="thank-you" element={<ThankYouPage />} />
                 <Route path="blog" element={<BlogPage />} />
                 <Route path="blog/:slug" element={<BlogPostPage />} />
+                <Route path="projects" element={<ProjectsPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
               <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -50,6 +53,7 @@ export default function App() {
                   <Route index element={<AdminDashboardPage />} />
                   <Route path="leads" element={<AdminLeadsPage />} />
                   <Route path="admissions" element={<AdminAdmissionsPage />} />
+                  <Route path="projects" element={<AdminProjectsPage />} />
                   <Route path="*" element={<Navigate to="/admin" replace />} />
                 </Route>
               </Route>

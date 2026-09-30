@@ -2,6 +2,7 @@ import { CirclePlay, CodeXml, ContactRound, MessageCircle, Music2 } from 'lucide
 import { Link } from 'react-router-dom'
 import { navigationLinks, siteData, socialLinks } from '../data/siteData'
 import { externalLinkProps } from '../utils/externalLinkProps'
+import logo from '../assets/logo.png'
 
 function SocialIcon({ name, size = 18 }) {
   if (name === 'linkedin') return <ContactRound size={size} />
@@ -16,7 +17,9 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="page-container footer-main">
         <div className="footer-about">
-          <Link className="brand" to="/">Riz<span>Mern</span><i>.</i></Link>
+          <Link className="brand" to="/">
+            <img src={logo} alt="RizMern" className="brand-logo" />
+          </Link>
           <p>Build real-world web and mobile products with a learning path that takes you from curious beginner to confident developer.</p>
           <div className="social-links">
             {socialLinks.map((item) => (

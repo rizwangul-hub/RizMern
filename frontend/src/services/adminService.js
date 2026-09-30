@@ -10,6 +10,26 @@ export async function getAdminRecords(type, params = {}) {
   return response.data
 }
 
+export async function getAdminProjects(params = {}) {
+  const response = await api.get('/projects/admin', { params })
+  return response.data
+}
+
+export async function createAdminProject(project) {
+  const response = await api.post('/projects', project)
+  return response.data
+}
+
+export async function updateAdminProject(id, updates) {
+  const response = await api.patch(`/projects/${id}`, updates)
+  return response.data
+}
+
+export async function deleteAdminProject(id) {
+  const response = await api.delete(`/projects/${id}`)
+  return response.data
+}
+
 export async function updateAdminRecord(type, id, updates) {
   const response = await api.patch(`/${type}/${id}`, updates)
   return response.data

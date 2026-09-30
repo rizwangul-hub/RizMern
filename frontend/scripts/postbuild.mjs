@@ -23,6 +23,7 @@ const routes = [
   '/course',
   '/pricing',
   '/instructor',
+  '/projects',
   '/demo',
   '/admission',
   '/thank-you',

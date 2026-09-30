@@ -396,6 +396,7 @@ export const thankYouData = {
 export const navigationLinks = [
   { label: 'Home', href: '/' },
   { label: 'Course', href: '/course' },
+  { label: 'My Work', href: '/projects' },
   { label: 'Roadmap', href: '/#roadmap' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Instructor', href: '/instructor' },
