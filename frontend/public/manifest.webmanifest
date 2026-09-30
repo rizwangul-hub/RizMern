@@ -1,0 +1,16 @@
+{
+  "name": "RizMern",
+  "short_name": "RizMern",
+  "description": "Learn full stack web and React Native app development with AI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080912",
+  "theme_color": "#080912",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
