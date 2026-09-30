@@ -1,4 +1,4 @@
-import { CirclePlay, CodeXml, ContactRound, MessageCircle } from 'lucide-react'
+import { CirclePlay, CodeXml, ContactRound, MessageCircle, Music2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { navigationLinks, siteData, socialLinks } from '../data/siteData'
 import { externalLinkProps } from '../utils/externalLinkProps'
@@ -7,6 +7,7 @@ function SocialIcon({ name, size = 18 }) {
   if (name === 'linkedin') return <ContactRound size={size} />
   if (name === 'github') return <CodeXml size={size} />
   if (name === 'youtube') return <CirclePlay size={size} />
+  if (name === 'tiktok') return <Music2 size={size} />
   return <MessageCircle size={size} />
 }
 

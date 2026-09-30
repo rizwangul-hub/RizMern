@@ -34,7 +34,7 @@ function organizationSchema() {
     name: siteData.brand,
     url: absoluteUrl('/'),
     logo: absoluteUrl('/rizmern-icon.svg'),
-    sameAs: socialLinks.filter(({ icon }) => ['linkedin', 'github', 'youtube'].includes(icon)).map(({ href }) => href),
+    sameAs: socialLinks.filter(({ icon }) => ['linkedin', 'github', 'youtube', 'tiktok'].includes(icon)).map(({ href }) => href),
   }
 }
 

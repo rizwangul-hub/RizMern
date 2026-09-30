@@ -13,7 +13,7 @@ const personSchema = {
   name: siteData.instructor,
   jobTitle: siteData.instructorTitle,
   url: `${siteData.siteUrl}/instructor`,
-  sameAs: socialLinks.filter(({ icon }) => ['linkedin', 'github'].includes(icon)).map(({ href }) => href),
+  sameAs: socialLinks.filter(({ icon }) => ['linkedin', 'github', 'tiktok'].includes(icon)).map(({ href }) => href),
 }
 
 export default function InstructorPage() {

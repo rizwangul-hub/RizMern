@@ -184,8 +184,8 @@ export const instructorPageData = {
     { date: 'TBA', title: 'Web and mobile projects', description: 'Selected project and milestone details to be added.' },
     { date: 'TBA', title: 'RizMern teaching journey', description: 'Teaching milestones to be added.' },
   ],
-  linkedinUrl: 'https://www.linkedin.com/',
-  githubUrl: 'https://github.com/',
+  linkedinUrl: 'https://www.linkedin.com/in/rizwanmerndev',
+  githubUrl: 'https://github.com/rizwangul-hub',
   finalCta: 'Learn directly from Rizwan',
 }
 
@@ -403,8 +403,9 @@ export const navigationLinks = [
 ]
 
 export const socialLinks = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'linkedin' },
+  { label: 'LinkedIn', href: instructorPageData.linkedinUrl, icon: 'linkedin' },
   { label: 'WhatsApp', href: siteData.whatsappLink, icon: 'whatsapp' },
-  { label: 'GitHub', href: 'https://github.com/', icon: 'github' },
+  { label: 'GitHub', href: instructorPageData.githubUrl, icon: 'github' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@mernstackdeveloper', icon: 'tiktok' },
   { label: 'YouTube', href: 'https://www.youtube.com/', icon: 'youtube' },
 ]

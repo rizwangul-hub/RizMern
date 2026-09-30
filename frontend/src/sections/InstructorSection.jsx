@@ -2,7 +2,7 @@ import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Sparkles } from 'lucide-re
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import ScrollReveal from '../components/ScrollReveal'
-import { homePageData, siteData } from '../data/siteData'
+import { homePageData, instructorPageData, siteData } from '../data/siteData'
 
 export default function InstructorSection() {
   const section = homePageData.sectionContent.instructor
@@ -23,7 +23,7 @@ export default function InstructorSection() {
           <h3>{siteData.instructorTitle}</h3>
           {siteData.instructorBio.map((line) => <p key={line}>{line}</p>)}
           <div className="hm-instructor-links">
-            <Button href="https://www.linkedin.com/" target="_blank" rel="noreferrer">{section.button} <ArrowUpRight size={15} /></Button>
+            <Button href={instructorPageData.linkedinUrl} target="_blank" rel="noreferrer">{section.button} <ArrowUpRight size={15} /></Button>
             <Link className="hm-text-link" to="/instructor">{section.moreLink} <ArrowRight size={15} /></Link>
           </div>
         </ScrollReveal>
