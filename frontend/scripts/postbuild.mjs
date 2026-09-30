@@ -1,10 +1,12 @@
-import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
+import { access, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
+import { constants } from 'node:fs'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { tmpdir } from 'node:os'
-import puppeteer from 'puppeteer'
+import chromium from '@sparticuz/chromium'
+import puppeteer from 'puppeteer-core'
 import { loadEnv } from 'vite'
 import blogPosts from '../src/data/blogPosts.js'
 import { siteData } from '../src/data/siteData.js'
@@ -30,6 +32,31 @@ const routes = [
 
 function logProgress(message) {
   process.stdout.write(`[postbuild] ${new Date().toISOString()} ${message}\n`)
+}
+
+async function getBrowserExecutablePath() {
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH
+  if (process.platform === 'linux') return chromium.executablePath()
+
+  const candidates = process.platform === 'win32'
+    ? [
+        join(process.env.PROGRAMFILES || 'C:\\Program Files', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+        join(process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+        join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+        join(process.env.PROGRAMFILES || 'C:\\Program Files', 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
+      ]
+    : ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome']
+
+  for (const candidate of candidates) {
+    try {
+      await access(candidate, constants.F_OK)
+      return candidate
+    } catch {
+      continue
+    }
+  }
+
+  throw new Error('No local Chrome browser found. Set PUPPETEER_EXECUTABLE_PATH to a Chrome executable.')
 }
 
 const criticalCss = `
@@ -169,12 +196,16 @@ async function prerender() {
   try {
     logProgress('Waiting for the Vite preview server.')
     await waitForServer(server)
-    logProgress('Launching headless Chrome with Puppeteer.')
+    logProgress('Launching packaged Chromium with Puppeteer.')
+    const executablePath = await getBrowserExecutablePath()
+    const browserArgs = process.platform === 'linux'
+      ? [...chromium.args, '--disable-dev-shm-usage', '--disable-gpu']
+      : ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
     browser = await puppeteer.launch({
-      headless: true,
+      headless: process.platform === 'linux' ? 'shell' : true,
       userDataDir,
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
-      ...(process.env.PUPPETEER_EXECUTABLE_PATH ? { executablePath: process.env.PUPPETEER_EXECUTABLE_PATH } : {}),
+      executablePath,
+      args: browserArgs,
     })
     await createShareAssets(browser)
     const failures = []

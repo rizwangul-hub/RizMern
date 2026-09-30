@@ -81,7 +81,7 @@ This guide deploys the React/Vite frontend to Vercel, the Express API to Render,
    | `VITE_GA_ID` | Optional GA4 measurement ID |
    | `VITE_GSC_VERIFICATION` | Optional Search Console verification token |
 
-4. The production build prerenders public routes with Puppeteer. `frontend/package.json` explicitly approves the install script for the locked Puppeteer version, so `npm ci` downloads its matching Chrome for Linux. Do **not** set `PUPPETEER_SKIP_DOWNLOAD=true` in Vercel. If you update Puppeteer, review and update its pinned `allowScripts` approval to match the new lockfile version.
+4. The production build prerenders public routes with Puppeteer Core and `@sparticuz/chromium`. That Chromium package includes the Linux shared libraries required by Vercel's build image, so it does not depend on the image having libraries such as `libnspr4` installed. The frontend requires Node.js 22.12 or newer. On Windows or macOS, the build script uses an installed Chrome/Edge browser; set `PUPPETEER_EXECUTABLE_PATH` if it is installed elsewhere.
 5. Deploy and verify the Vercel preview before promoting it to production. `npm run build` also runs `npm run check:prod`'s underlying script to confirm the generated files and sitemap domain.
 6. Add `www.rizmern.com` and `rizmern.com` in Vercel's domain settings. Choose one canonical primary domain and configure Vercel's redirect for the other.
 
@@ -135,9 +135,9 @@ Render's free instances may spin down when idle. The first request after inactiv
 
 ### Puppeteer or Chrome fails during the Vercel build
 
-Check that the build used `npm ci`, that the Puppeteer version in `frontend/package-lock.json` matches the pinned `allowScripts` entry in `frontend/package.json`, and that the Puppeteer download was not skipped. Remove custom `PUPPETEER_EXECUTABLE_PATH` or `PUPPETEER_SKIP_DOWNLOAD` settings unless you have configured a compatible Linux browser yourself, then redeploy.
+The build now uses the Linux Chromium binary and runtime libraries packaged by `@sparticuz/chromium`, rather than downloading Chrome from Puppeteer. Confirm Vercel uses Node.js 22.12 or newer, then redeploy. `PUPPETEER_EXECUTABLE_PATH` is only needed locally if Chrome/Edge is installed outside the standard location.
 
-After Vite reports that its client build completed, the postbuild step starts a preview server, launches Chrome, and prerenders each public route. It prints `[postbuild]` progress for these stages and routes. If the Vercel log stops before the postbuild completion message, use the last `[postbuild]` line to identify whether the preview server, Chrome launch, or a specific route stalled.
+After Vite reports that its client build completed, the postbuild step starts a preview server, launches packaged Chromium, and prerenders each public route. It prints `[postbuild]` progress for these stages and routes. If the Vercel log stops before the postbuild completion message, use the last `[postbuild]` line to identify whether the preview server, Chromium launch, or a specific route stalled.
 
 ### Startup reports a MongoDB error
 
