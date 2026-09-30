@@ -401,7 +401,6 @@ export const navigationLinks = [
   { label: 'Roadmap', href: '/#roadmap' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Instructor', href: '/instructor' },
-  { label: 'Student Portal', href: '/student/login' },
   { label: 'FAQ', href: '/#faq' },
 ]
 

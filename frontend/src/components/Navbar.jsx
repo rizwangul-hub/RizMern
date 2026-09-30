@@ -28,9 +28,14 @@ export default function Navbar() {
             </NavLink>
           ))}
         </div>
-        <Button to="/demo" className="nav-cta">
-          Join Free Demo Class <ArrowUpRight size={15} />
-        </Button>
+        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <Link to="/student/login" className="student-portal-btn">
+            🎓 Student Portal
+          </Link>
+          <Button to="/demo" className="nav-cta">
+            Join Free Demo Class <ArrowUpRight size={15} />
+          </Button>
+        </div>
         <button
           type="button"
           className="menu-toggle"
@@ -48,6 +53,9 @@ export default function Navbar() {
                 {link.label}
               </NavLink>
             ))}
+            <NavLink to="/student/login" onClick={() => setIsOpen(false)} style={{ color: '#d8b4fe', fontWeight: 600 }}>
+              🎓 Student Portal
+            </NavLink>
             <Button to="/demo" onClick={() => setIsOpen(false)}>Join Free Demo Class <ArrowUpRight size={15} /></Button>
           </div>
       )}

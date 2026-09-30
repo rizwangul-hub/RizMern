@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /thank-you
 
-Sitemap: https://www.rizmern.com/sitemap.xml
+Sitemap: https://www.rizmern.online/sitemap.xml

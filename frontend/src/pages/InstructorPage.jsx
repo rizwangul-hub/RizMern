@@ -4,6 +4,7 @@ import InstructorCTASection from '../sections/InstructorCTASection'
 import InstructorHeroSection from '../sections/InstructorHeroSection'
 import InstructorJourneySection from '../sections/InstructorJourneySection'
 import InstructorSkillsSection from '../sections/InstructorSkillsSection'
+import SkillsMatrix from '../components/SkillsMatrix'
 import InstructorTeachingSection from '../sections/InstructorTeachingSection'
 import { siteData, socialLinks } from '../data/siteData'
 
@@ -28,6 +29,7 @@ export default function InstructorPage() {
       <InstructorHeroSection />
       <InstructorBioSection />
       <InstructorSkillsSection />
+      <SkillsMatrix />
       <InstructorTeachingSection />
       <InstructorJourneySection />
       <InstructorCTASection />

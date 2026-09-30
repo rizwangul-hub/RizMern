@@ -1,4 +1,5 @@
 import CourseAISection from '../sections/CourseAISection'
+import BuildWithAi from '../components/BuildWithAi'
 import CourseFinalCTASection from '../sections/CourseFinalCTASection'
 import CourseHeroSection from '../sections/CourseHeroSection'
 import CourseInclusionsSection from '../sections/CourseInclusionsSection'
@@ -53,6 +54,7 @@ export default function CoursePage() {
       <CourseRoadmapSection />
       <CourseTechnologiesSection />
       <CourseAISection />
+      <BuildWithAi />
       <CourseProjectsSection />
       <CourseInclusionsSection />
       <CourseScheduleSection />
