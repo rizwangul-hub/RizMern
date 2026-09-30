@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const { getAllowedOrigins } = require('./config/env')
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler')
 const apiRoutes = require('./routes')
+const connectDatabase = require('./config/db')
 
 const app = express()
 const allowedOrigins = new Set(getAllowedOrigins())
@@ -31,6 +32,16 @@ if (process.env.NODE_ENV !== 'test') {
   morgan.token('path', (req) => req.path)
   app.use(morgan(':method :path :status :response-time ms'))
 }
+
+// Ensure MongoDB is connected on every serverless invocation
+app.use(async (req, res, next) => {
+  try {
+    await connectDatabase()
+    next()
+  } catch (error) {
+    next(error)
+  }
+})
 
 app.get('/', (req, res) => res.json({ message: 'RizMern API running' }))
 app.use('/api', apiRoutes)
