@@ -54,14 +54,18 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid rgba(177, 182, 220, .09); background: rgba(8, 9, 18, .78); backdrop-filter: blur(18px); }
-.navbar { min-height: 112px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-.navbar .brand-logo { height: 72px; }
-.brand { flex-shrink: 0; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 25px; letter-spacing: -1.4px; color: #fff; }
+.navbar { min-height: 115px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.brand { flex-shrink: 0; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 25px; letter-spacing: -1.4px; color: #fff; perspective: 1000px; display: inline-flex; align-items: center; }
 .brand span { color: transparent; background: var(--gradient); background-clip: text; -webkit-background-clip: text; }
 .brand i { color: var(--cyan); font-style: normal; }
-@keyframes spin-x { 0% { transform: rotateX(0deg); } 100% { transform: rotateX(360deg); } }
-.brand-logo { height: 58px; width: auto; display: block; object-fit: contain; animation: spin-x 4s linear infinite; transform-style: preserve-3d; }
-.brand-logo--topbar { height: 32px; display: inline-block; vertical-align: middle; margin-right: 6px; animation: spin-x 4s linear infinite; transform-style: preserve-3d; }
+@keyframes spin-x {
+  0% { transform: perspective(800px) rotateX(0deg); }
+  50% { transform: perspective(800px) rotateX(180deg); }
+  100% { transform: perspective(800px) rotateX(360deg); }
+}
+.brand-logo { height: 86px; width: auto; max-width: 240px; display: block; object-fit: contain; animation: spin-x 6s ease-in-out infinite; transform-style: preserve-3d; filter: drop-shadow(0 4px 14px rgba(133, 72, 231, 0.25)); }
+.navbar .brand-logo { height: 86px; }
+.brand-logo--topbar { height: 42px; display: inline-block; vertical-align: middle; margin-right: 8px; animation: spin-x 6s ease-in-out infinite; transform-style: preserve-3d; }
 .nav-links { display: flex; align-items: center; gap: clamp(18px, 2.5vw, 36px); margin-left: auto; }
 .nav-links a { position: relative; color: #a6a8bb; font-size: 14px; transition: color .2s; }
 .nav-links a:hover, .nav-links a.active { color: #f7f7ff; }
@@ -190,7 +194,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   .roadmap-grid { grid-template-columns: repeat(2, 1fr); }.roadmap-card { min-height: 190px; }.feature-layout { gap: 38px; }.instructor-preview { gap: 55px; }
 }
 @media (max-width: 760px) {
-  .page-container { width: min(100% - 38px, 560px); }.navbar { min-height: 88px; }.navbar .brand-logo { height: 58px; }.nav-links, .navbar > .nav-cta { display: none; }.menu-toggle { display: grid; place-items: center; }
+  .page-container { width: min(100% - 38px, 560px); }.navbar { min-height: 94px; }.navbar .brand-logo { height: 68px; }.nav-links, .navbar > .nav-cta, .navbar .nav-actions { display: none; }.menu-toggle { display: grid; place-items: center; }
   .mobile-menu { display: flex; flex-direction: column; gap: 0; padding: 2px 19px 17px; border-top: 1px solid rgba(177, 182, 220, .08); background: rgba(8, 9, 18, .97); }.mobile-menu > a:not(.button) { padding: 12px 2px; border-bottom: 1px solid rgba(177, 182, 220, .07); color: #c4c4d5; font-size: 13px; }.mobile-menu .button { margin-top: 13px; }
   .hero-section { grid-template-columns: 1fr; min-height: 0; padding-top: 55px; padding-bottom: 78px; }.hero-copy { text-align: center; }.hero-copy h1 { margin-top: 19px; font-size: clamp(42px, 10vw, 57px); letter-spacing: -2.3px; }.hero-description { max-width: 475px; margin-inline: auto; font-size: 13px; }.hero-course-tag { justify-content: center; flex-wrap: wrap; line-height: 1.5; }.hero-actions { justify-content: center; }.hero-proof { justify-content: center; margin-top: 23px; }.hero-visual { min-height: 350px; margin-top: 12px; transform: none; }.code-window { width: min(100% - 22px, 410px); }.orbit--outer { width: 390px; height: 250px; }.orbit--inner { width: 300px; height: 200px; }.chip--react { top: 28px; right: -1px; }.chip--ai { bottom: 24px; left: -1px; }.float-chip { padding: 9px 11px; }.scroll-cue { right: 3px; bottom: 24px; }
   .stats-strip { padding: 17px 10px; }.stats-grid { grid-template-columns: repeat(2, 1fr); row-gap: 13px; }.stat:nth-child(2) { border-right: 0; }.stat:nth-child(-n+2) { padding-bottom: 10px; border-bottom: 1px solid rgba(190, 190, 225, .1); }.stat:nth-child(n+3) { padding-top: 3px; }
