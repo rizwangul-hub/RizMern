@@ -81,7 +81,7 @@ This guide deploys the React/Vite frontend to Vercel, the Express API to Render,
    | `VITE_GA_ID` | Optional GA4 measurement ID |
    | `VITE_GSC_VERIFICATION` | Optional Search Console verification token |
 
-4. The production build prerenders public routes with Puppeteer. Allow Puppeteer's install step to download its matching Chrome for Linux: do **not** set `PUPPETEER_SKIP_DOWNLOAD=true` in Vercel. The postbuild script launches that downloaded headless browser; no browser installed on your own computer is used by the Vercel build. If you have customized install settings, use `npm ci` without skipping Puppeteer's browser download.
+4. The production build prerenders public routes with Puppeteer. `frontend/package.json` explicitly approves the install script for the locked Puppeteer version, so `npm ci` downloads its matching Chrome for Linux. Do **not** set `PUPPETEER_SKIP_DOWNLOAD=true` in Vercel. If you update Puppeteer, review and update its pinned `allowScripts` approval to match the new lockfile version.
 5. Deploy and verify the Vercel preview before promoting it to production. `npm run build` also runs `npm run check:prod`'s underlying script to confirm the generated files and sitemap domain.
 6. Add `www.rizmern.com` and `rizmern.com` in Vercel's domain settings. Choose one canonical primary domain and configure Vercel's redirect for the other.
 
@@ -135,7 +135,7 @@ Render's free instances may spin down when idle. The first request after inactiv
 
 ### Puppeteer or Chrome fails during the Vercel build
 
-Check that the build used `npm ci` and that the Puppeteer download was not skipped. Remove custom `PUPPETEER_EXECUTABLE_PATH` or `PUPPETEER_SKIP_DOWNLOAD` settings unless you have configured a compatible Linux browser yourself, then redeploy.
+Check that the build used `npm ci`, that the Puppeteer version in `frontend/package-lock.json` matches the pinned `allowScripts` entry in `frontend/package.json`, and that the Puppeteer download was not skipped. Remove custom `PUPPETEER_EXECUTABLE_PATH` or `PUPPETEER_SKIP_DOWNLOAD` settings unless you have configured a compatible Linux browser yourself, then redeploy.
 
 ### Startup reports a MongoDB error
 
