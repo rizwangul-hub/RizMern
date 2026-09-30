@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { BriefcaseBusiness, LayoutDashboard, LogOut, Menu, Users, UserRoundCheck, X } from 'lucide-react'
+import { BookOpen, BriefcaseBusiness, GraduationCap, LayoutDashboard, LogOut, Menu, Settings, Users, UserRoundCheck, X } from 'lucide-react'
 import { Toaster } from 'react-hot-toast'
 import useAuth from '../context/useAuth'
 import SEO from '../components/SEO'
@@ -10,6 +10,9 @@ const links = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/admin/leads', label: 'Demo Leads', icon: Users },
   { to: '/admin/admissions', label: 'Admissions', icon: UserRoundCheck },
+  { to: '/admin/students', label: 'Students LMS', icon: GraduationCap },
+  { to: '/admin/content', label: 'Course Syllabus', icon: BookOpen },
+  { to: '/admin/settings', label: 'Course Config', icon: Settings },
   { to: '/admin/projects', label: 'Projects', icon: BriefcaseBusiness },
 ]
 

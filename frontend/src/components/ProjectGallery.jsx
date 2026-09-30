@@ -1,6 +1,6 @@
 import ProjectCard from './ProjectCard'
 
-export default function ProjectGallery({ projects, loading, error, onRetry }) {
+export default function ProjectGallery({ projects, loading, error, onRetry, onSelect }) {
   if (loading) {
     return <p className="work-feedback" role="status">Loading project work…</p>
   }
@@ -18,7 +18,7 @@ export default function ProjectGallery({ projects, loading, error, onRetry }) {
 
   return (
     <div className="work-grid">
-      {projects.map((project) => <ProjectCard key={project._id || project.slug} project={project} />)}
+      {projects.map((project) => <ProjectCard key={project._id || project.slug} project={project} onSelect={onSelect} />)}
     </div>
   )
 }

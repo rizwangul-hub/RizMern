@@ -1,0 +1,47 @@
+/* Course CTA Styles */
+.course-cta-section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-20);
+  position: relative;
+}
+
+.course-cta-box {
+  background: linear-gradient(145deg, rgba(17, 29, 56, 0.9), rgba(11, 17, 32, 0.95));
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 50px -15px rgba(139, 92, 246, 0.25);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .course-cta-box {
+    padding: var(--space-16) var(--space-12);
+  }
+}
+
+.course-cta-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  line-height: 1.15;
+}
+
+.course-cta-desc {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto var(--space-8);
+  line-height: 1.7;
+}
+
+.course-cta-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}

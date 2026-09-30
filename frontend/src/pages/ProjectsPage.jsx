@@ -2,10 +2,12 @@ import { useMemo, useState } from 'react'
 import SEO from '../components/SEO'
 import SectionTitle from '../components/SectionTitle'
 import ProjectGallery from '../components/ProjectGallery'
+import ProjectDetailModal from '../components/ProjectDetailModal'
 import useProjects from '../hooks/useProjects'
 
 export default function ProjectsPage() {
   const { projects, loading, error, retry } = useProjects()
+  const [selectedProject, setSelectedProject] = useState(null)
   const [category, setCategory] = useState('All')
   const categories = useMemo(() => ['All', ...new Set(projects.map((project) => project.category))], [projects])
   const visibleProjects = category === 'All' ? projects : projects.filter((project) => project.category === category)
@@ -44,8 +46,15 @@ export default function ProjectsPage() {
           loading={loading}
           error={error}
           onRetry={retry}
+          onSelect={setSelectedProject}
         />
       </section>
+      {selectedProject && (
+        <ProjectDetailModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </>
   )
 }

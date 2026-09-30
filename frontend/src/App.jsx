@@ -6,8 +6,11 @@ import SiteLayout from './layouts/SiteLayout'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 
+import { StudentAuthProvider } from './context/StudentAuthContext'
+
 const Home = lazy(() => import('./pages/Home'))
 const CoursePage = lazy(() => import('./pages/CoursePage'))
+const CurriculumPage = lazy(() => import('./pages/CurriculumPage'))
 const PricingPage = lazy(() => import('./pages/PricingPage'))
 const InstructorPage = lazy(() => import('./pages/InstructorPage'))
 const DemoPage = lazy(() => import('./pages/DemoPage'))
@@ -23,6 +26,16 @@ const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage')
 const AdminLeadsPage = lazy(() => import('./pages/admin/AdminLeadsPage'))
 const AdminAdmissionsPage = lazy(() => import('./pages/admin/AdminAdmissionsPage'))
 const AdminProjectsPage = lazy(() => import('./pages/admin/AdminProjectsPage'))
+const AdminStudentsPage = lazy(() => import('./pages/admin/AdminStudentsPage'))
+const AdminCourseContentPage = lazy(() => import('./pages/admin/AdminCourseContentPage'))
+const AdminCourseSettingsPage = lazy(() => import('./pages/admin/AdminCourseSettingsPage'))
+const StudentLoginPage = lazy(() => import('./pages/student/StudentLoginPage'))
+const StudentProtectedRoute = lazy(() => import('./components/student/StudentProtectedRoute'))
+const StudentDashboardPage = lazy(() => import('./pages/student/StudentDashboardPage'))
+const StudentCoursePage = lazy(() => import('./pages/student/StudentCoursePage'))
+const StudentLessonPage = lazy(() => import('./pages/student/StudentLessonPage'))
+const StudentProgressPage = lazy(() => import('./pages/student/StudentProgressPage'))
+const StudentProfilePage = lazy(() => import('./pages/student/StudentProfilePage'))
 
 function RouteFallback() {
   return <div className="route-loading" role="status" aria-live="polite">Loading RizMern…</div>
@@ -62,34 +75,50 @@ export default function App() {
     <HelmetProvider>
       <BrowserRouter>
         <AuthProvider>
-          <MobileLoadingScreen />
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route element={<SiteLayout />}>
-                <Route index element={<Home />} />
-                <Route path="course" element={<CoursePage />} />
-                <Route path="pricing" element={<PricingPage />} />
-                <Route path="instructor" element={<InstructorPage />} />
-                <Route path="demo" element={<DemoPage />} />
-                <Route path="admission" element={<AdmissionPage />} />
-                <Route path="thank-you" element={<ThankYouPage />} />
-                <Route path="blog" element={<BlogPage />} />
-                <Route path="blog/:slug" element={<BlogPostPage />} />
-                <Route path="projects" element={<ProjectsPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Route>
-              <Route path="/admin/login" element={<AdminLoginPage />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="/admin" element={<AdminLayout />}>
-                  <Route index element={<AdminDashboardPage />} />
-                  <Route path="leads" element={<AdminLeadsPage />} />
-                  <Route path="admissions" element={<AdminAdmissionsPage />} />
-                  <Route path="projects" element={<AdminProjectsPage />} />
-                  <Route path="*" element={<Navigate to="/admin" replace />} />
+          <StudentAuthProvider>
+            <MobileLoadingScreen />
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
+                <Route element={<SiteLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="course" element={<CoursePage />} />
+                  <Route path="curriculum" element={<CurriculumPage />} />
+                  <Route path="pricing" element={<PricingPage />} />
+                  <Route path="instructor" element={<InstructorPage />} />
+                  <Route path="demo" element={<DemoPage />} />
+                  <Route path="admission" element={<AdmissionPage />} />
+                  <Route path="thank-you" element={<ThankYouPage />} />
+                  <Route path="blog" element={<BlogPage />} />
+                  <Route path="blog/:slug" element={<BlogPostPage />} />
+                  <Route path="projects" element={<ProjectsPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
                 </Route>
-              </Route>
-            </Routes>
-          </Suspense>
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboardPage />} />
+                    <Route path="leads" element={<AdminLeadsPage />} />
+                    <Route path="admissions" element={<AdminAdmissionsPage />} />
+                    <Route path="students" element={<AdminStudentsPage />} />
+                    <Route path="content" element={<AdminCourseContentPage />} />
+                    <Route path="settings" element={<AdminCourseSettingsPage />} />
+                    <Route path="projects" element={<AdminProjectsPage />} />
+                    <Route path="*" element={<Navigate to="/admin" replace />} />
+                  </Route>
+                </Route>
+                {/* Student Learning Portal Routes */}
+                <Route path="/student/login" element={<StudentLoginPage />} />
+                <Route element={<StudentProtectedRoute />}>
+                  <Route path="/student" element={<Navigate to="/student/dashboard" replace />} />
+                  <Route path="/student/dashboard" element={<StudentDashboardPage />} />
+                  <Route path="/student/course" element={<StudentCoursePage />} />
+                  <Route path="/student/course/lesson/:lessonId" element={<StudentLessonPage />} />
+                  <Route path="/student/progress" element={<StudentProgressPage />} />
+                  <Route path="/student/profile" element={<StudentProfilePage />} />
+                </Route>
+              </Routes>
+            </Suspense>
+          </StudentAuthProvider>
         </AuthProvider>
       </BrowserRouter>
     </HelmetProvider>

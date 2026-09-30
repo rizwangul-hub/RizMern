@@ -1,0 +1,200 @@
+.students-management {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.management-action-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .management-action-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.management-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.management-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.header-btn-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.management-loading,
+.management-error,
+.management-empty {
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+  background-color: var(--bg-navy-900);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  color: var(--text-secondary);
+}
+
+.empty-sub {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+
+.students-table-wrap {
+  overflow-x: auto;
+  background-color: var(--bg-navy-900);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.students-table th {
+  padding: 0.875rem 1rem;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+}
+
+.students-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.student-cell-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-cell-name strong {
+  color: #ffffff;
+  font-size: 0.9375rem;
+}
+
+.student-id-tag {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono, monospace);
+}
+
+.contact-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-txt {
+  color: var(--text-primary);
+}
+
+.phone-txt {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.course-chip {
+  font-size: 0.75rem;
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--accent-purple-light);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.table-progress-bar {
+  flex: 1;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.table-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+  border-radius: var(--radius-full);
+}
+
+.table-progress-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 32px;
+}
+
+.status-badge-chip {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+}
+
+.status-badge-chip.status-active {
+  background-color: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.status-badge-chip.status-suspended {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.status-badge-chip.status-completed {
+  background-color: rgba(6, 182, 212, 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.table-action-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.enroll-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.modal-dialog-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.field-note {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.2rem;
+}

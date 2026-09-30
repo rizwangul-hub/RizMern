@@ -1,0 +1,103 @@
+/* Development Journey Styles */
+.journey-section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+  position: relative;
+  background: rgba(14, 22, 43, 0.35);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.journey-header {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto var(--space-12);
+}
+
+.journey-timeline-wrap {
+  position: relative;
+  max-width: 840px;
+  margin: 0 auto;
+  padding-left: 2rem;
+}
+
+.journey-timeline-wrap::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  width: 2px;
+  background: linear-gradient(180deg, #38bdf8 0%, #8b5cf6 50%, #d946ef 100%);
+  border-radius: var(--radius-full);
+}
+
+.journey-node {
+  position: relative;
+  margin-bottom: var(--space-8);
+  padding-left: var(--space-6);
+}
+
+.journey-node:last-child {
+  margin-bottom: 0;
+}
+
+.journey-bullet {
+  position: absolute;
+  left: -27px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-navy-900);
+  border: 3px solid var(--accent-purple);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+}
+
+.journey-card {
+  background: var(--bg-navy-900);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: left;
+}
+
+.journey-phase-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-blue-light);
+  margin-bottom: var(--space-1);
+}
+
+.journey-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.journey-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.journey-skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.journey-skill-item {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  background: var(--bg-navy-950);
+  color: var(--accent-purple-light);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}

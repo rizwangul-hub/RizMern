@@ -1,0 +1,242 @@
+.course-content-management {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.content-management-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+@media (min-width: 800px) {
+  .content-management-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.content-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.content-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.content-metrics-pill {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.metric-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.metric-tag.published-tag {
+  background-color: rgba(52, 211, 153, 0.1);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+.content-actions-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.modules-management-tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.admin-module-card {
+  background-color: var(--bg-navy-900);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.admin-module-head {
+  padding: var(--space-4) var(--space-6);
+  background-color: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.module-title-zone {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.month-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-purple-light);
+  background-color: rgba(139, 92, 246, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.mod-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.mod-lessons-count {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.admin-mod-desc {
+  padding: var(--space-3) var(--space-6) 0;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.admin-lessons-wrap {
+  overflow-x: auto;
+}
+
+.empty-lessons-notice {
+  padding: var(--space-6);
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+}
+
+.admin-lessons-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.admin-lessons-table th {
+  padding: 0.65rem 1rem;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: rgba(255, 255, 255, 0.01);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.admin-lessons-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.video-badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  background-color: rgba(6, 182, 212, 0.12);
+  color: var(--accent-cyan);
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-sm);
+  margin-left: 0.5rem;
+}
+
+.publish-toggle-btn {
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.publish-toggle-btn.published {
+  background-color: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+}
+
+.publish-toggle-btn.draft {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.slug-txt {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.lesson-action-cell {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.action-txt-btn {
+  background: none;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.action-txt-btn:hover {
+  text-decoration: underline;
+}
+
+.action-txt-btn.delete-btn {
+  color: #fca5a5;
+}
+
+.lesson-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.large-dialog {
+  max-width: 680px;
+}
+
+.code-font {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.checkbox-row {
+  margin-top: 0.25rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}

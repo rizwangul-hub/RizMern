@@ -1,0 +1,122 @@
+/* Build With AI Section Styles */
+.ai-section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ai-content {
+  position: relative;
+  z-index: 1;
+}
+
+.ai-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto var(--space-12);
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .ai-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+.ai-card {
+  padding: var(--space-8);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-workflow-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.ai-workflow-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: var(--bg-navy-850);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+
+.ai-item-icon {
+  font-size: 1.25rem;
+  margin-top: 2px;
+}
+
+.ai-item-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.ai-item-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* AI Engineering Rules Card */
+.ai-rules-card {
+  background: linear-gradient(145deg, rgba(17, 29, 56, 0.8), rgba(11, 17, 32, 0.95));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: 0 0 30px -10px rgba(139, 92, 246, 0.2);
+}
+
+.rule-box {
+  border-left: 3px solid var(--accent-purple);
+  padding-left: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.rule-box.security {
+  border-left-color: var(--accent-blue);
+}
+
+.rule-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.rule-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
