@@ -215,6 +215,26 @@ Only `status` and/or `notes` are accepted.
 
 Deletes an admission request and returns its ID.
 
+### Admin project management
+
+Project management routes require a valid admin token. Project records contain a title, category, screenshot image URL, optional live URL, technology names, description, display order, and featured/published flags.
+
+#### `GET /api/projects/admin`
+
+Supports `page`, `limit` (maximum 100), `search` (title, category, description, and technologies), and `published=true|false` filters. Results are ordered by display order.
+
+#### `POST /api/projects`
+
+Creates a project. Required fields: `title`, `category`, `imageUrl`, `technologies` (1–12 strings), and `description`. Optional fields: `liveUrl`, `order`, `featured`, and `published`. Image and live URLs must use HTTP or HTTPS.
+
+#### `PATCH /api/projects/:id`
+
+Updates any supported project field. The project slug is refreshed when its title changes.
+
+#### `DELETE /api/projects/:id`
+
+Deletes a project and returns its ID.
+
 ### Admin stats
 
 #### `GET /api/stats`
