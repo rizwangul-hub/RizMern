@@ -137,6 +137,8 @@ Render's free instances may spin down when idle. The first request after inactiv
 
 Check that the build used `npm ci`, that the Puppeteer version in `frontend/package-lock.json` matches the pinned `allowScripts` entry in `frontend/package.json`, and that the Puppeteer download was not skipped. Remove custom `PUPPETEER_EXECUTABLE_PATH` or `PUPPETEER_SKIP_DOWNLOAD` settings unless you have configured a compatible Linux browser yourself, then redeploy.
 
+After Vite reports that its client build completed, the postbuild step starts a preview server, launches Chrome, and prerenders each public route. It prints `[postbuild]` progress for these stages and routes. If the Vercel log stops before the postbuild completion message, use the last `[postbuild]` line to identify whether the preview server, Chrome launch, or a specific route stalled.
+
 ### Startup reports a MongoDB error
 
 Check the Atlas URI, database user's password encoding, Atlas Network Access allowlist, and that the backend environment variables are present. The API intentionally exits if MongoDB cannot be connected.

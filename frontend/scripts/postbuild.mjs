@@ -27,6 +27,11 @@ const routes = [
   '/blog',
   ...blogPosts.map((post) => `/blog/${post.slug}`),
 ]
+
+function logProgress(message) {
+  process.stdout.write(`[postbuild] ${new Date().toISOString()} ${message}\n`)
+}
+
 const criticalCss = `
 *{box-sizing:border-box}
 html{background:#080912}
@@ -80,7 +85,12 @@ function robotsTxt() {
 
 async function waitForServer(child) {
   const deadline = Date.now() + 30000
+  let startupError
+  child.once('error', (error) => {
+    startupError = error
+  })
   while (Date.now() < deadline) {
+    if (startupError) throw new Error('Could not start the Vite preview server.', { cause: startupError })
     if (child.exitCode !== null) throw new Error(`Vite preview exited with code ${child.exitCode}`)
     try {
       const response = await fetch(origin)
@@ -109,6 +119,7 @@ function icoFromPng(png) {
 }
 
 async function createShareAssets(browser) {
+  logProgress('Generating Open Graph image and favicon assets.')
   const page = await browser.newPage()
   const iconSvg = await readFile(join(root, 'public', 'rizmern-icon.svg'), 'utf8')
   await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 })
@@ -156,7 +167,9 @@ async function prerender() {
   })
   let browser
   try {
+    logProgress('Waiting for the Vite preview server.')
     await waitForServer(server)
+    logProgress('Launching headless Chrome with Puppeteer.')
     browser = await puppeteer.launch({
       headless: true,
       userDataDir,
@@ -165,13 +178,14 @@ async function prerender() {
     })
     await createShareAssets(browser)
     const failures = []
+    const page = await browser.newPage()
+    page.on('pageerror', (error) => failures.push(error.message))
+    await page.setCacheEnabled(false)
+    await page.setViewport({ width: 1440, height: 1000 })
 
     for (const route of routes) {
-      const page = await browser.newPage()
-      page.on('pageerror', (error) => failures.push(error.message))
+      logProgress(`Prerendering ${route}.`)
       try {
-        await page.setCacheEnabled(false)
-        await page.setViewport({ width: 1440, height: 1000 })
         const routeUrl = route === '/' ? origin : `${origin}${route}/`
         await page.goto(routeUrl, { waitUntil: 'domcontentloaded' })
         await page.waitForSelector('h1', { timeout: 20000 })
@@ -191,12 +205,14 @@ async function prerender() {
         await mkdir(dirname(output), { recursive: true })
         await writeFile(output, html)
         if (route !== '/') await writeFile(join(dist, `${route.slice(1)}.html`), html)
-      } finally {
-        await page.close()
+      } catch (error) {
+        throw new Error(`Failed to prerender route "${route}".`, { cause: error })
       }
     }
+    await page.close()
 
     if (failures.length) throw new Error(`Browser errors during prerender:\n${failures.join('\n')}`)
+    logProgress(`Prerendered ${routes.length} routes successfully.`)
   } finally {
     if (browser) await browser.close()
     server.kill()
@@ -204,11 +220,18 @@ async function prerender() {
   }
 }
 
-await mkdir(dist, { recursive: true })
-const sitemap = sitemapXml()
-const robots = robotsTxt()
-await writeFile(join(root, 'public', 'sitemap.xml'), sitemap)
-await writeFile(join(root, 'public', 'robots.txt'), robots)
-await writeFile(join(dist, 'sitemap.xml'), sitemap)
-await writeFile(join(dist, 'robots.txt'), robots)
-await prerender()
+try {
+  logProgress(`Preparing sitemap and robots.txt for ${routes.length} routes.`)
+  await mkdir(dist, { recursive: true })
+  const sitemap = sitemapXml()
+  const robots = robotsTxt()
+  await writeFile(join(root, 'public', 'sitemap.xml'), sitemap)
+  await writeFile(join(root, 'public', 'robots.txt'), robots)
+  await writeFile(join(dist, 'sitemap.xml'), sitemap)
+  await writeFile(join(dist, 'robots.txt'), robots)
+  await prerender()
+  logProgress('Postbuild prerender completed.')
+} catch (error) {
+  process.stderr.write(`[postbuild] Failed: ${error.stack || error.message}\n`)
+  process.exitCode = 1
+}
