@@ -621,3 +621,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 @media (prefers-reduced-motion: reduce) {
   .hm-spinner { animation-duration: 1.8s; }
 }
+
+.ip-portrait-placeholder { object-fit: cover; }
+.ip-portrait-badge { position: absolute; top: calc(50% - 90px + 12px); right: calc(50% - 90px + 5px); display: grid; width: 33px; height: 33px; place-items: center; border: 2px solid #141529; border-radius: 50%; color: #ffe59a; background: #6654a7; font-style: normal; }

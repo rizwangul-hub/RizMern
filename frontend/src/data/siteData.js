@@ -1,5 +1,7 @@
 export const SITE_URL = (import.meta.env?.VITE_SITE_URL || 'https://www.rizmern.com').replace(/\/+$/, '')
 
+const whatsappNumber = '923179500901'
+
 export const siteData = {
   brand: 'RizMern',
   siteUrl: SITE_URL,
@@ -12,8 +14,9 @@ export const siteData = {
     'His teaching focuses on clear project structure, real workflows, and building with confidence.',
   ],
   price: 'PKR XX,XXX',
-  whatsappLink: 'https://wa.me/0000000000000',
-  whatsappGroupLink: 'https://chat.whatsapp.com/replace-this-link',
+  whatsappNumber,
+  whatsappLink: `https://wa.me/${whatsappNumber}`,
+  whatsappGroupLink: 'https://chat.whatsapp.com/Hg61usPuMv25DW9cJKK0dR?s=cl&p=a&mlu=4&ilr=4&iam=0',
   whatsappPrefilledMessage: 'Hello Rizwan, I want to know about the MERN course',
   email: 'hello@rizmern.com',
   timings: 'TBA',

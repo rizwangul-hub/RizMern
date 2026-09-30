@@ -2,6 +2,7 @@ import { ArrowUpRight, CodeXml, ContactRound, MessageCircle, Sparkles } from 'lu
 import Button from '../components/Button'
 import ScrollReveal from '../components/ScrollReveal'
 import { instructorPageData, siteData } from '../data/siteData'
+import profileImage from '../assets/profile.jpg'
 
 export default function InstructorHeroSection() {
   return (
@@ -10,7 +11,8 @@ export default function InstructorHeroSection() {
         <div className="ip-portrait-glow" />
         <div className="ip-portrait-ring ip-portrait-ring--outer" />
         <div className="ip-portrait-ring ip-portrait-ring--inner" />
-        <div className="ip-portrait-placeholder" role="img" aria-label={`Portrait placeholder for ${siteData.instructor}`}><span>RU</span><i><Sparkles size={17} /></i></div>
+        <img className="ip-portrait-placeholder" src={profileImage} alt={`${siteData.instructor}, ${siteData.instructorTitle}`} width="180" height="180" loading="eager" />
+        <i className="ip-portrait-badge" aria-hidden="true"><Sparkles size={17} /></i>
         <span className="ip-portrait-label">YOUR INSTRUCTOR</span>
       </ScrollReveal>
       <ScrollReveal className="ip-hero-copy" delay={0.12}>
