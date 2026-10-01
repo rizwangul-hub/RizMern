@@ -36,6 +36,7 @@ export default function Footer() {
           ))}
           <Link to="/blog">Development blog</Link>
           <Link to="/demo">Free demo class</Link>
+          <Link to="/admin/login">Admin portal</Link>
         </div>
         <div className="footer-contact">
           <h3>Let&apos;s build your next chapter</h3>
@@ -45,7 +46,12 @@ export default function Footer() {
       </div>
       <div className="page-container footer-bottom">
         <span>&copy; {siteData.brand} - {siteData.instructor}</span>
-        <span>Made for the next generation of builders</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span>Made for the next generation of builders</span>
+          <Link to="/admin/login" style={{ color: '#64748b', fontSize: '11px', textDecoration: 'none' }} title="Admin Login">
+            🔒 Admin
+          </Link>
+        </div>
       </div>
     </footer>
   )

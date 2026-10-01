@@ -141,8 +141,9 @@ export function StudentLoginPage() {
           <p>
             Enrolled student without credentials? Contact instructor Rizwan Ullah on WhatsApp or check your admission email.
           </p>
-          <div className="student-back-link">
+          <div className="student-back-link" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Link to="/">← Back to RizMern Homepage</Link>
+            <Link to="/admin/login" style={{ color: '#c084fc', fontSize: '12px', fontWeight: 500 }}>Admin Login →</Link>
           </div>
         </div>
       </div>
