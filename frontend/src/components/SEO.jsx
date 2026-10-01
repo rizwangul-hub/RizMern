@@ -62,7 +62,12 @@ export default function SEO({
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
       <meta httpEquiv="content-language" content="en" />
       <meta name="theme-color" content="#080912" />
-      {import.meta.env.VITE_GSC_VERIFICATION && <meta name="google-site-verification" content={import.meta.env.VITE_GSC_VERIFICATION} />}
+      {(import.meta.env.VITE_GSC_VERIFICATION || '1RZvgLnDEDmfBtWrCceW1MNjFMvcBQooANK2xfddcr4') && (
+        <meta
+          name="google-site-verification"
+          content={import.meta.env.VITE_GSC_VERIFICATION || '1RZvgLnDEDmfBtWrCceW1MNjFMvcBQooANK2xfddcr4'}
+        />
+      )}
       <link rel="canonical" href={canonical} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
