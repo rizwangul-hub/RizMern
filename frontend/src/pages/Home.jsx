@@ -8,6 +8,7 @@ import LearnSection from '../sections/LearnSection'
 import ProjectsSection from '../sections/ProjectsSection'
 import PortfolioSection from '../sections/PortfolioSection'
 import StatsSection from '../sections/StatsSection'
+import ScrollLaptopSection from '../components/three/ScrollLaptopSection'
 import TeachingSection from '../sections/TeachingSection'
 import SEO from '../components/SEO'
 import HomeSeoText from '../components/HomeSeoText'
@@ -34,6 +35,7 @@ export default function Home() {
       />
       <HeroSection />
       <StatsSection />
+      <ScrollLaptopSection />
       <LearnSection />
       <TeachingSection />
       <ProjectsSection />
