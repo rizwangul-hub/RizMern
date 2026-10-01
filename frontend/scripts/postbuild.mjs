@@ -229,7 +229,12 @@ async function prerender() {
         await page.evaluate(() => window.scrollTo(0, 0))
         await delay(150)
 
-        const html = (await page.content()).replaceAll(`${origin}/assets/`, '/assets/')
+        let html = (await page.content()).replaceAll(`${origin}/assets/`, '/assets/')
+        // The prerenderer scrolls every section, which otherwise eagerly preloads the lazy globe chunk.
+        html = html.replace(
+          /<link\b(?=[^>]*\brel="modulepreload")(?=[^>]*\bhref="[^"]*GlobeScene-[^"]+")[^>]*>/gi,
+          ''
+        )
         const output = route === '/'
           ? join(dist, 'index.html')
           : join(dist, ...route.split('/').filter(Boolean), 'index.html')

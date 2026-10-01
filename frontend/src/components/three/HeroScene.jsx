@@ -1,12 +1,12 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, MeshDistortMaterial } from '@react-three/drei'
 import { useRef } from 'react'
-import * as THREE from 'three'
 import useDeviceCapability from '../../hooks/useDeviceCapability'
+import { THREE_CONFIG } from '../../data/threeConfig'
 import Particles from './Particles'
 import TechOrbit from './TechOrbit'
 
-function OrbitingTech() {
+function OrbitingTech({ isMobile }) {
   const groupRef = useRef(null)
 
   useFrame((state) => {
@@ -47,7 +47,12 @@ function OrbitingTech() {
       </mesh>
 
       <TechOrbit />
-      <Particles count={180} size={2.5} scale={[9, 9, 9]} color="#a5f3fc" />
+      <Particles
+        count={isMobile ? THREE_CONFIG.hero.mobileParticles : THREE_CONFIG.hero.particles}
+        size={2.5}
+        scale={[9, 9, 9]}
+        color="#a5f3fc"
+      />
     </group>
   )
 }
@@ -76,7 +81,7 @@ export default function HeroScene() {
         <directionalLight position={[4, 5, 4]} intensity={1.7} color="#8b5cf6" />
         <pointLight position={[-4, -2, 3]} intensity={20} color="#22d3ee" />
         <pointLight position={[3, 2, 4]} intensity={18} color="#8b5cf6" />
-        <OrbitingTech />
+        <OrbitingTech isMobile={isMobile} />
       </Canvas>
     </div>
   )

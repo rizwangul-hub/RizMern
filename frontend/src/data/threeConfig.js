@@ -16,6 +16,28 @@ export const THREE_CONFIG = {
     colors: ['#8b5cf6', '#3b82f6', '#06b6d4', '#c4b5fd'],
     motion: 0.08,
   },
+  globe: {
+    colors: {
+      dots: '#5266b5',
+      dotHighlight: '#8797ef',
+      atmosphere: '#06b6d4',
+      atmosphereAccent: '#8b5cf6',
+      marker: '#67e8f9',
+      arcs: '#22d3ee',
+    },
+    desktopDotCount: 2500,
+    mobileDotCount: 1200,
+    rotationSpeed: 0.18,
+    radius: 1.55,
+    // Optional equirectangular image in public/. Bright pixels are treated as land.
+    landMaskPath: '/globe-land-mask.png',
+    arcDestinations: [
+      { latitude: 51.5, longitude: -0.1 },
+      { latitude: 40.7, longitude: -74 },
+      { latitude: 35.7, longitude: 139.7 },
+      { latitude: -33.9, longitude: 151.2 },
+    ],
+  },
   section: {
     eyebrow: 'DEVELOPMENT JOURNEY IN 3D',
     title: 'From Idea to Live Website',
