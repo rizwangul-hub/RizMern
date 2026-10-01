@@ -12,6 +12,7 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "seed:admin": "node src/utils/seedAdmin.js",
+    "set:admin": "node src/utils/setAdminCredentials.js",
     "seed:projects": "node src/utils/seedProjects.js",
     "seed:lms": "node src/utils/seedLms.js",
     "test": "node --test"

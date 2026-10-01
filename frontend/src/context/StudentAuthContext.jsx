@@ -57,10 +57,17 @@ export function StudentAuthProvider({ children }) {
     async function checkAuth() {
       try {
         const storedToken = localStorage.getItem('rizmern_student_token');
-        const headers = { 'Content-Type': 'application/json' };
-        if (storedToken) {
-          headers.Authorization = `Bearer ${storedToken}`;
+        if (!storedToken) {
+          if (isMounted) {
+            setIsLoading(false);
+          }
+          return;
         }
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${storedToken}`,
+        };
 
         const res = await fetch(`${apiBase}/student/me`, {
           method: 'GET',

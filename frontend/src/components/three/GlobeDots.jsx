@@ -67,6 +67,8 @@ export default function GlobeDots({ count }) {
   const dotData = useMemo(() => createDotPositions(count, landMask), [count, landMask])
 
   useEffect(() => {
+    if (!THREE_CONFIG.globe.landMaskPath) return
+
     let active = true
     readLandMask(THREE_CONFIG.globe.landMaskPath)
       .then((mask) => {

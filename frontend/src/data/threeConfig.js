@@ -27,7 +27,7 @@ export const THREE_CONFIG = {
     mobileDotCount: 1200,
     rotationSpeed: 0.18,
     radius: 1.55,
-    landMaskPath: '/globe-land-mask.png',
+    landMaskPath: null,
     arcDestinations: [
       { latitude: 51.5, longitude: -0.1 },
       { latitude: 40.7, longitude: -74 },
