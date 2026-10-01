@@ -1,8 +1,8 @@
-import { useReducedMotion } from 'framer-motion'
-import { motion } from 'framer-motion'
+import { useReducedMotion, motion } from 'framer-motion'
 import { ArrowRight, BadgeCheck, Check, Clock3, Sparkles } from 'lucide-react'
 import Button from '../components/Button'
 import ScrollReveal from '../components/ScrollReveal'
+import TiltCard from '../components/three/TiltCard'
 import { pricingPageData, siteData } from '../data/siteData'
 
 export default function MainPricingSection() {
@@ -13,11 +13,12 @@ export default function MainPricingSection() {
   return (
     <section className="pp-main page-container" aria-label="Course fee">
       <ScrollReveal>
-        <motion.div
-          className="pp-price-card"
-          animate={reduceMotion ? undefined : { backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}
-        >
+        <TiltCard intensity={8} className="pricing-tilt-card">
+          <motion.div
+            className="pp-price-card"
+            animate={reduceMotion ? undefined : { backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}
+          >
           <div className="pp-price-card-inner">
             {limitedSeats && <span className="pp-limited-badge"><Sparkles size={13} /> {pricingPageData.limitedSeats.count} {pricingPageData.limitedSeats.label}</span>}
             <div className="pp-price-top">
@@ -41,6 +42,7 @@ export default function MainPricingSection() {
             </div>
           </div>
         </motion.div>
+        </TiltCard>
       </ScrollReveal>
     </section>
   )

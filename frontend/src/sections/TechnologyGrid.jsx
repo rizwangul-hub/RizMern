@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import GlassCard from '../components/GlassCard'
 import ScrollReveal from '../components/ScrollReveal'
+import TiltCard from '../components/three/TiltCard'
 
 const technologyIcons = {
   code: Code2,
@@ -66,15 +67,17 @@ export default function TechnologyGrid({ technologies, className = '' }) {
         const logoPath = technologyLogos[technology.name]
         return (
           <ScrollReveal key={technology.name} delay={(index % 4) * 0.045}>
-            <GlassCard className="hm-tech-card">
-              <span className={`hm-tech-icon${logoPath ? ' hm-tech-icon--logo' : ''}`}>
-                {logoPath
-                  ? <img src={`${deviconBaseUrl}/${logoPath}`} alt="" aria-hidden="true" loading="lazy" decoding="async" />
-                  : <Icon size={20} strokeWidth={1.8} aria-hidden="true" />}
-              </span>
-              <h3>{technology.name}</h3>
-              <p>{technology.description}</p>
-            </GlassCard>
+            <TiltCard intensity={10} className="tech-tilt-card">
+              <GlassCard className="hm-tech-card">
+                <span className={`hm-tech-icon${logoPath ? ' hm-tech-icon--logo' : ''}`}>
+                  {logoPath
+                    ? <img src={`${deviconBaseUrl}/${logoPath}`} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                    : <Icon size={20} strokeWidth={1.8} aria-hidden="true" />}
+                </span>
+                <h3>{technology.name}</h3>
+                <p>{technology.description}</p>
+              </GlassCard>
+            </TiltCard>
           </ScrollReveal>
         )
       })}

@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Sparkles } from 'lucide-re
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import ScrollReveal from '../components/ScrollReveal'
+import TiltCard from '../components/three/TiltCard'
 import { homePageData, instructorPageData, siteData } from '../data/siteData'
 import profileImage from '../assets/profile.jpg'
 
@@ -11,18 +12,20 @@ export default function InstructorSection() {
     <section className="hm-section page-container" aria-labelledby="hm-instructor-title">
       <div className="hm-instructor-layout">
         <ScrollReveal className="hm-instructor-portrait">
-          <div className="hm-portrait-ring hm-portrait-ring--outer" />
-          <div className="hm-portrait-ring hm-portrait-ring--inner" />
-          <img
-            className="hm-portrait-placeholder"
-            src={profileImage}
-            alt={`${siteData.instructor}, ${siteData.instructorTitle}`}
-            width="240"
-            height="240"
-            loading="lazy"
-          />
-          <i className="hm-portrait-badge" aria-hidden="true"><Sparkles size={18} /></i>
-          <span className="hm-portrait-caption"><BriefcaseBusiness size={14} /> {section.label}</span>
+          <TiltCard intensity={10} className="instructor-tilt-card">
+            <div className="hm-portrait-ring hm-portrait-ring--outer" />
+            <div className="hm-portrait-ring hm-portrait-ring--inner" />
+            <img
+              className="hm-portrait-placeholder"
+              src={profileImage}
+              alt={`${siteData.instructor}, ${siteData.instructorTitle}`}
+              width="240"
+              height="240"
+              loading="lazy"
+            />
+            <i className="hm-portrait-badge" aria-hidden="true"><Sparkles size={18} /></i>
+            <span className="hm-portrait-caption"><BriefcaseBusiness size={14} /> {section.label}</span>
+          </TiltCard>
         </ScrollReveal>
         <ScrollReveal className="hm-instructor-copy" delay={0.12}>
           <span className="eyebrow">{section.eyebrow}</span>

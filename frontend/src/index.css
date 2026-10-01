@@ -869,3 +869,41 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   .hm-portrait-badge { top: calc(50% - 95px + 10px); right: calc(50% - 95px + 8px); width: 32px; height: 32px; }
 }
 
+/* 3D Section Accents & Tilt Card utilities */
+.tech-tilt-card { height: 100%; display: block; border-radius: 16px; }
+.pricing-tilt-card { max-width: 580px; margin-inline: auto; display: block; }
+.instructor-tilt-card { display: grid; place-items: center; position: relative; }
+
+/* Stats Strip 3D rotating ring accents */
+.stats-3d-container { position: relative; overflow: hidden; }
+.stats-3d-accent { position: absolute; inset: 0; display: flex; justify-content: space-around; align-items: center; pointer-events: none; opacity: 0.28; }
+.stats-3d-ring { width: 90px; height: 90px; border-radius: 50%; border: 1.5px solid #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.4); }
+.stats-3d-ring--1 { animation: stats-spin-3d 9s linear infinite; }
+.stats-3d-ring--2 { animation: stats-spin-3d 11s linear infinite reverse; border-color: #06b6d4; box-shadow: 0 0 25px rgba(6, 182, 212, 0.4); }
+@keyframes stats-spin-3d {
+  0% { transform: perspective(500px) rotateX(65deg) rotateZ(0deg); }
+  100% { transform: perspective(500px) rotateX(65deg) rotateZ(360deg); }
+}
+
+/* Instructor Section 3D rotating rings */
+@keyframes ring-spin-3d-outer {
+  0% { transform: perspective(800px) rotateX(25deg) rotateY(15deg) rotateZ(0deg); }
+  100% { transform: perspective(800px) rotateX(25deg) rotateY(15deg) rotateZ(360deg); }
+}
+@keyframes ring-spin-3d-inner {
+  0% { transform: perspective(800px) rotateX(-20deg) rotateY(-20deg) rotateZ(360deg); }
+  100% { transform: perspective(800px) rotateX(-20deg) rotateY(-20deg) rotateZ(0deg); }
+}
+.hm-portrait-ring--outer {
+  animation: ring-spin-3d-outer 22s linear infinite;
+  transform-style: preserve-3d;
+}
+.hm-portrait-ring--inner {
+  animation: ring-spin-3d-inner 16s linear infinite;
+  transform-style: preserve-3d;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hm-portrait-ring--outer, .hm-portrait-ring--inner, .stats-3d-ring { animation: none !important; }
+}
+
+

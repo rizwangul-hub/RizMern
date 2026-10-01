@@ -12,10 +12,15 @@ function OrbitingTech({ isMobile }) {
   useFrame((state) => {
     if (!groupRef.current) return
 
+    const scrollY = typeof window !== 'undefined' ? window.scrollY || 0 : 0
+    const scrollFactor = Math.min(scrollY / 600, 1)
+
     groupRef.current.rotation.y = state.clock.elapsedTime * 0.45 + state.pointer.x * 0.5
-    groupRef.current.rotation.x = state.pointer.y * 0.22
+    groupRef.current.rotation.x = state.pointer.y * 0.22 - scrollFactor * 0.2
     groupRef.current.position.x = state.pointer.x * 0.35
-    groupRef.current.position.y = state.pointer.y * 0.2
+    groupRef.current.position.y = state.pointer.y * 0.2 - scrollFactor * 0.4
+    const targetScale = Math.max(0.85, 1 - scrollFactor * 0.15)
+    groupRef.current.scale.set(targetScale, targetScale, targetScale)
   })
 
   return (
@@ -72,11 +77,9 @@ export default function HeroScene() {
     <div className="three-hero-shell" aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 42 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, powerPreference: 'high-performance' }}
+        dpr={isMobile ? [1, 1.2] : [1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
-        <color attach="background" args={['#070b15']} />
-        <fog attach="fog" args={['#070b15', 5, 12]} />
         <ambientLight intensity={0.8} />
         <directionalLight position={[4, 5, 4]} intensity={1.7} color="#8b5cf6" />
         <pointLight position={[-4, -2, 3]} intensity={20} color="#22d3ee" />

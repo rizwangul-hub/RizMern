@@ -1,11 +1,29 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function TiltCard({ children, className = '', intensity = 14, disabled = false, style = {} }) {
+export default function TiltCard({
+  children,
+  className = '',
+  intensity = 14,
+  disabled = false,
+  style = {},
+}) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const [isTouch, setIsTouch] = useState(false)
 
-  if (disabled) {
-    return <div className={`tilt-card ${className}`.trim()} style={style}>{children}</div>
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const touchCheck = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window
+      setIsTouch(touchCheck)
+    }
+  }, [])
+
+  if (disabled || isTouch) {
+    return (
+      <div className={`tilt-card ${className}`.trim()} style={style}>
+        {children}
+      </div>
+    )
   }
 
   const handleMove = (event) => {
@@ -24,7 +42,7 @@ export default function TiltCard({ children, className = '', intensity = 14, dis
       className={`tilt-card ${className}`.trim()}
       style={{
         ...style,
-        transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(-3px)`,
+        transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(-2px)`,
       }}
       whileHover={{ y: -4 }}
       onMouseMove={handleMove}
