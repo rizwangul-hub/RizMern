@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { ArrowRight, ArrowUpRight, Braces, Code2, Database, Terminal } from 'lucide-react'
 import Button from '../components/Button'
 import { homePageData, siteData } from '../data/siteData'
+
+const HeroScene = lazy(() => import('../components/three/HeroScene'))
 
 const techGlyphs = {
   React: { icon: Code2, className: 'hm-tech--react' },
@@ -50,6 +52,9 @@ function CodeMockup() {
       <div className="hm-hero-halo" />
       <div className="hm-hero-orbit hm-hero-orbit--one" />
       <div className="hm-hero-orbit hm-hero-orbit--two" />
+      <Suspense fallback={<div className="three-hero-placeholder" aria-hidden="true" />}>
+        <HeroScene />
+      </Suspense>
       <div className="hm-code-editor hm-hero-enter" style={{ animationDelay: '0.28s' }}>
         <div className="hm-editor-bar">
           <span className="hm-editor-dots"><i /><i /><i /></span>

@@ -1,9 +1,21 @@
 /**
- * Configuration for the 3D Scroll-Driven Laptop Section
- * All stage titles, captions, colors, and camera/model transforms are centralized here.
+ * Shared configuration for the 3D visual layers used across the site.
+ * Adjust colors, counts, and motion here without touching component logic.
  */
 
 export const THREE_CONFIG = {
+  hero: {
+    orbGlow: '#8b5cf6',
+    orbSecondary: '#06b6d4',
+    ringColor: '#38bdf8',
+    particles: 180,
+    mobileParticles: 90,
+  },
+  floatingBackground: {
+    particleCount: 80,
+    colors: ['#8b5cf6', '#3b82f6', '#06b6d4', '#c4b5fd'],
+    motion: 0.08,
+  },
   section: {
     eyebrow: 'DEVELOPMENT JOURNEY IN 3D',
     title: 'From Idea to Live Website',
