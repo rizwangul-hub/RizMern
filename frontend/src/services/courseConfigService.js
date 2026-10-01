@@ -3,7 +3,7 @@
  * Handles public course info and authenticated admin course settings
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+import { API_BASE_URL } from '../config/api';
 
 export const DEFAULT_COURSE_CONFIG = {
   courseName: 'Three-Month MERN Stack & React Native App Development',

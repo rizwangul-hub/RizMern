@@ -4,13 +4,12 @@ const compression = require('compression')
 const express = require('express')
 const helmet = require('helmet')
 const morgan = require('morgan')
-const { getAllowedOrigins } = require('./config/env')
+const { getAllowedOrigins, isOriginAllowed } = require('./config/env')
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler')
 const apiRoutes = require('./routes')
 const connectDatabase = require('./config/db')
 
 const app = express()
-const allowedOrigins = new Set(getAllowedOrigins())
 
 app.set('trust proxy', 1)
 app.disable('x-powered-by')
@@ -18,11 +17,12 @@ app.use(helmet())
 app.use(compression())
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || allowedOrigins.has(origin)) return callback(null, true)
+    if (isOriginAllowed(origin)) return callback(null, true)
     const error = new Error('CORS origin is not allowed.')
     error.status = 403
     return callback(error)
   },
+  credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }))

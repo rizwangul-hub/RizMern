@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
+import { API_BASE_URL } from '../config/api';
 
 const StudentAuthContext = createContext(null);
 
@@ -7,7 +8,7 @@ export function StudentAuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('rizmern_student_token') || '');
   const [isLoading, setIsLoading] = useState(true);
 
-  const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+  const apiBase = API_BASE_URL;
 
   // Authenticated fetch wrapper for student API endpoints
   const authFetch = useCallback(

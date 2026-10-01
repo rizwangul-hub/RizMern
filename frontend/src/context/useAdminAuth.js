@@ -1,9 +1,10 @@
 import { useCallback } from 'react'
 import useAuth from './useAuth'
+import { API_BASE_URL } from '../config/api'
 
 export function useAdminAuth() {
   const auth = useAuth()
-  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  const apiBase = API_BASE_URL
 
   const authFetch = useCallback(async (endpoint, options = {}) => {
     const headers = {

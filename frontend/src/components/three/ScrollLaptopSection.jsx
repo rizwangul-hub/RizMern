@@ -2,6 +2,8 @@ import React, { lazy, Suspense, useCallback, useEffect, useRef, useState } from 
 import { motion, useReducedMotion, useScroll } from 'framer-motion'
 import { Sparkles, ArrowDown } from 'lucide-react'
 import { THREE_CONFIG } from '../../data/threeConfig'
+import { siteData } from '../../data/siteData'
+import Button from '../Button'
 import './ScrollLaptopSection.css'
 
 // Lazy load the 3D canvas so Three.js bundle is separated and only loaded when near viewport
@@ -14,10 +16,14 @@ function checkWebGLSupport() {
   if (typeof window === 'undefined') return false
   try {
     const canvas = document.createElement('canvas')
-    return Boolean(
+    const supportsWebGL = Boolean(
       window.WebGLRenderingContext &&
         (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
     )
+    const lowPower =
+      typeof navigator !== 'undefined' &&
+      (navigator.hardwareConcurrency <= 4 || (navigator.deviceMemory && navigator.deviceMemory <= 4))
+    return supportsWebGL && !lowPower
   } catch {
     return false
   }
@@ -43,12 +49,22 @@ function StaticFallbackView() {
       </div>
 
       <div className="laptop-fallback-grid">
-        {THREE_CONFIG.stages.map((stage) => (
-          <div key={stage.id} className="laptop-fallback-card">
-            <span className="laptop-stage-badge">{stage.badge}</span>
-            <h3 className="laptop-stage-heading">{stage.title}</h3>
-            <div className="laptop-stage-subheading">{stage.subtitle}</div>
-            <p className="laptop-stage-description">{stage.description}</p>
+        {THREE_CONFIG.laptop.screens.map((screen) => (
+          <div key={screen.id} className="laptop-fallback-card">
+            <span className="laptop-stage-badge">{screen.badge}</span>
+            <h3 className="laptop-stage-heading">{screen.title}</h3>
+            <div className="laptop-stage-subheading">{screen.subtitle}</div>
+            <ul className="laptop-fallback-screen-lines">
+              {screen.fallbackLines.map((line) => <li key={line}>{line}</li>)}
+            </ul>
+            {screen.id === 'summary' && (
+              <>
+                <p className="laptop-stage-description">
+                  {siteData.courseName} · {siteData.duration} · {siteData.classFormat} · {siteData.experienceLevel} · {siteData.instructor}
+                </p>
+                <Button to="/demo">{siteData.demoCtaText}</Button>
+              </>
+            )}
           </div>
         ))}
       </div>
@@ -65,6 +81,7 @@ export function ScrollLaptopSection() {
   const [hasWebGL, setHasWebGL] = useState(true)
 
   const prefersReducedMotion = useReducedMotion()
+  const stages = THREE_CONFIG.laptop.screens
 
   // Track scroll progress via framer-motion useScroll
   const { scrollYProgress } = useScroll({
@@ -84,9 +101,10 @@ export function ScrollLaptopSection() {
 
       // Update HTML text stage only when boundary is crossed
       let stage = 0
-      if (latest >= 0.75) stage = 3
-      else if (latest >= 0.5) stage = 2
-      else if (latest >= 0.25) stage = 1
+      if (latest >= 0.808) stage = 4
+      else if (latest >= 0.616) stage = 3
+      else if (latest >= 0.424) stage = 2
+      else if (latest >= 0.232) stage = 1
 
       setActiveStage((prev) => (prev !== stage ? stage : prev))
     })
@@ -135,8 +153,7 @@ export function ScrollLaptopSection() {
     const sectionStart = rect.top + scrollTop
     const sectionHeight = containerRef.current.offsetHeight - window.innerHeight
 
-    // Map stage to scroll percentage: 0 -> 0.05, 1 -> 0.35, 2 -> 0.65, 3 -> 0.95
-    const stagePercents = [0.05, 0.35, 0.65, 0.95]
+    const stagePercents = [0.14, 0.33, 0.52, 0.71, 0.9]
     const targetScroll = sectionStart + sectionHeight * stagePercents[targetStage]
 
     window.scrollTo({ top: targetScroll, behavior: 'smooth' })
@@ -147,7 +164,7 @@ export function ScrollLaptopSection() {
     return <StaticFallbackView />
   }
 
-  const currentStageInfo = THREE_CONFIG.stages[activeStage] || THREE_CONFIG.stages[0]
+  const currentStageInfo = stages[activeStage] || stages[0]
 
   return (
     <section
@@ -210,24 +227,23 @@ export function ScrollLaptopSection() {
               <p className="laptop-stage-description">{currentStageInfo.description}</p>
             </motion.div>
 
-            {/* 4-Dots Progress Navigation */}
-            <div className="laptop-dots-nav" role="tablist" aria-label="Development stages">
-              {THREE_CONFIG.stages.map((stg) => (
+            <div className="laptop-dots-nav" role="tablist" aria-label="Course project stages">
+              {stages.map((stg, index) => (
                 <button
                   key={stg.id}
                   type="button"
                   role="tab"
-                  aria-selected={activeStage === stg.id}
-                  aria-label={`Jump to stage ${stg.id + 1}: ${stg.title}`}
-                  className={`laptop-dot ${activeStage === stg.id ? 'active' : ''}`}
-                  onClick={() => handleDotClick(stg.id)}
+                  aria-selected={activeStage === index}
+                  aria-label={`Jump to stage ${index + 1}: ${stg.title}`}
+                  className={`laptop-dot ${activeStage === index ? 'active' : ''}`}
+                  onClick={() => handleDotClick(index)}
                 />
               ))}
             </div>
 
             <div className="laptop-scroll-hint">
               <ArrowDown size={12} aria-hidden="true" />
-              <span>Scroll to navigate through the 3D development pipeline</span>
+              <span>{THREE_CONFIG.section.scrollHint}</span>
             </div>
           </div>
         </div>

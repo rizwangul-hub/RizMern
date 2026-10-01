@@ -6,7 +6,13 @@ export const siteData = {
   brand: 'RizMern',
   siteUrl: SITE_URL,
   courseName: 'MERN Stack + React Native App Development with AI',
+  courseTagline: 'Learn MERN Stack & React Native with AI',
   duration: '3 Months',
+  classFormat: 'Online Live Classes',
+  experienceLevel: 'Beginner Friendly',
+  demoCtaText: 'Join Free Demo Class',
+  demoChipText: 'Free Demo Class',
+  courseTechList: ['HTML', 'CSS', 'Tailwind', 'JavaScript', 'React'],
   instructor: 'Rizwan Ullah',
   instructorTitle: 'MERN Stack and React Native App Developer',
   instructorBio: [

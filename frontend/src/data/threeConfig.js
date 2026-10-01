@@ -1,8 +1,6 @@
 /**
- * Shared configuration for the 3D visual layers used across the site.
- * Adjust colors, counts, and motion here without touching component logic.
+ * Shared visual configuration. Edit the laptop stage copy, chip labels, and transforms here.
  */
-
 export const THREE_CONFIG = {
   hero: {
     orbGlow: '#8b5cf6',
@@ -29,7 +27,6 @@ export const THREE_CONFIG = {
     mobileDotCount: 1200,
     rotationSpeed: 0.18,
     radius: 1.55,
-    // Optional equirectangular image in public/. Bright pixels are treated as land.
     landMaskPath: '/globe-land-mask.png',
     arcDestinations: [
       { latitude: 51.5, longitude: -0.1 },
@@ -41,9 +38,9 @@ export const THREE_CONFIG = {
   section: {
     eyebrow: 'DEVELOPMENT JOURNEY IN 3D',
     title: 'From Idea to Live Website',
-    subtitle: 'Scroll to explore the 4-phase transformation from raw concept to a published full-stack application.',
+    subtitle: 'Scroll to explore the path from planning to a published full-stack application.',
+    scrollHint: 'Scroll to navigate through the course project journey',
   },
-
   colors: {
     laptopBody: '#13141f',
     laptopMetallic: 0.85,
@@ -59,8 +56,9 @@ export const THREE_CONFIG = {
     logoBackGlow: '#a855f7',
     floorReflection: '#4f46e5',
     particles: ['#a855f7', '#38bdf8', '#c084fc', '#818cf8'],
+    screenGlow: '#8b5cf6',
+    screenAccent: '#38bdf8',
   },
-
   dimensions: {
     baseWidth: 3.4,
     baseDepth: 2.3,
@@ -73,96 +71,93 @@ export const THREE_CONFIG = {
     trackpadWidth: 1.1,
     trackpadDepth: 0.75,
   },
-
-  stages: [
-    {
-      id: 0,
-      badge: 'Step 01',
-      title: '1. Plan with AI',
-      subtitle: 'System Design & Prompting',
-      description:
-        'Harness AI assistants to map out component trees, relational database schemas, and clean directory architectures before laying down code.',
-      screenType: 'ai_plan',
-      chatPrompt: 'RizMern Assistant: "Drafting schema for Courses, Students, Progress, and Auth..."',
-      progressPercent: '25%',
-      // 3D Transform targets for stage 0
-      transform: {
-        lidAngle: 0.2, // mostly closed, just peeling open
-        rotX: 0.35,
-        rotY: -0.45,
-        rotZ: 0.06,
-        camZ: 5.4,
-        camY: 1.2,
-      },
+  // Use a 2x canvas texture; keep these lines concise enough to stay legible on narrow screens.
+  laptop: {
+    loadingLabel: 'Preparing your course workspace',
+    labels: {
+      planHeading: 'AI PROJECT PLANNER',
+      prompt: 'YOUR PROMPT',
+      aiName: 'RizMern AI',
+      explorer: 'EXPLORER',
+      terminal: 'TERMINAL — RizMern API',
+      lock: '🔒',
+      launchChecklist: 'LAUNCH CHECKLIST',
+      liveCheck: '✓',
     },
-    {
-      id: 1,
-      badge: 'Step 02',
-      title: '2. Build the Frontend',
-      subtitle: 'React & Modern Tailwind UI',
-      description:
-        'Construct fluid, responsive interfaces using React components, Framer Motion transitions, and accessible Tailwind styling.',
-      screenType: 'frontend_code',
-      codeSnippet: `export function App() {\n  return (\n    <SiteLayout>\n      <Hero title="Build Modern Apps" />\n      <ProjectGallery live={true} />\n    </SiteLayout>\n  );\n}`,
-      progressPercent: '50%',
-      // 3D Transform targets for stage 1
-      transform: {
-        lidAngle: 1.85, // fully open (~106 deg)
-        rotX: 0.16,
-        rotY: 0.44, // rotated ~25 degrees
-        rotZ: -0.02,
-        camZ: 4.8,
-        camY: 1.0,
+    planPrompt: 'Build a modern portfolio website with React, Tailwind and a Node backend.',
+    planReply: 'Project structure ready to build:',
+    planTree: ['RizMern/', '  frontend/', '    src/', '      components/', '      pages/', '  backend/', '    models/', '    routes/', '    controllers/'],
+    codeLines: [
+      { text: 'export function Hero() {', color: '#c084fc' },
+      { text: '  return (', color: '#e2e8f0' },
+      { text: '    <section className="hero">', color: '#67e8f9' },
+      { text: '      <h1>{courseTagline}</h1>', color: '#fbbf24' },
+      { text: '      <a>{demoCtaText}</a>', color: '#a5f3fc' },
+      { text: '    </section>', color: '#67e8f9' },
+      { text: '  )', color: '#e2e8f0' },
+      { text: '}', color: '#c084fc' },
+    ],
+    fileTree: ['src', '  components', '  pages', '  data'],
+    tabs: ['Home.jsx', 'siteData.js'],
+    backendLines: [
+      '$ npm run dev',
+      'Server running on port 5000',
+      'MongoDB connected',
+      'POST /api/leads 201 Created',
+    ],
+    backendBadges: ['Node.js', 'Express', 'MongoDB'],
+    liveChecklist: ['GitHub', 'Vercel', 'Domain', 'Android APK'],
+    liveBadge: 'LIVE',
+    summaryEyebrow: 'COURSE OVERVIEW',
+    summaryFormatLabel: 'Learning format',
+    summaryLevelLabel: 'Experience level',
+    summaryInstructorLabel: 'Instructor',
+    screens: [
+      {
+        id: 'plan',
+        badge: 'PLAN WITH AI',
+        title: 'Plan with AI',
+        subtitle: 'Turn an idea into a clear project structure.',
+        fallbackLines: ['Chat prompt and project outline', 'Frontend and backend folders', 'Models, routes and controllers'],
+        transform: { lidAngle: 1.82, rotX: 0.2, rotY: -0.24, rotZ: 0, camZ: 5.1, camY: 0.95 },
       },
-    },
-    {
-      id: 2,
-      badge: 'Step 03',
-      title: '3. Connect Backend and Database',
-      subtitle: 'Node, Express, MongoDB & JWT',
-      description:
-        'Implement resilient REST APIs, JWT authentication middlewares, input validation guards, and MongoDB Atlas persistence.',
-      screenType: 'terminal_backend',
-      terminalOutput: [
-        '$ npm run dev',
-        '[RizMern API] listening on port 5000',
-        '✔ MongoDB connected: cluster0.mongodb.net',
-        '✔ JWT Auth & CORS Origin verified',
-        'Ready for client connections...',
-      ],
-      progressPercent: '75%',
-      // 3D Transform targets for stage 2
-      transform: {
-        lidAngle: 1.9,
-        rotX: 0.22,
-        rotY: 1.18, // side profile view
-        rotZ: 0.02,
-        camZ: 4.1, // closer camera
-        camY: 0.95,
+      {
+        id: 'frontend',
+        badge: 'BUILD THE FRONTEND',
+        title: 'Build the Frontend',
+        subtitle: 'Create the course website with reusable React components.',
+        fallbackLines: ['Project file tree and editor tabs', 'Readable React hero component', 'HTML, CSS, Tailwind, JavaScript, React'],
+        transform: { lidAngle: 1.86, rotX: 0.16, rotY: 0.28, rotZ: -0.02, camZ: 4.8, camY: 0.9 },
       },
-    },
-    {
-      id: 3,
-      badge: 'Step 04',
-      title: '4. Go Live with Your Domain',
-      subtitle: 'Cloud Deployment & Launch',
-      description:
-        'Push your code to GitHub, deploy full-stack to Vercel, attach your custom domain with SSL, and launch your verified portfolio to the world.',
-      screenType: 'live_site',
-      liveUrl: 'https://rizmern.com',
-      liveBadgeText: '● LIVE & VERIFIED',
-      progressPercent: '100%',
-      // 3D Transform targets for stage 3
-      transform: {
-        lidAngle: 1.85,
-        rotX: 0.08,
-        rotY: 0.0, // front-facing hero angle
-        rotZ: 0.0,
-        camZ: 4.25,
-        camY: 0.85,
+      {
+        id: 'backend',
+        badge: 'CONNECT THE BACKEND',
+        title: 'Connect Backend and Database',
+        subtitle: 'Connect an API and database to the application.',
+        fallbackLines: ['Node.js and Express terminal', 'MongoDB connection status', 'Lead API request response'],
+        transform: { lidAngle: 1.88, rotX: 0.2, rotY: 0.68, rotZ: 0.02, camZ: 4.55, camY: 0.9 },
       },
-    },
-  ],
+      {
+        id: 'live',
+        badge: 'GO LIVE',
+        title: 'Go Live with Your Domain',
+        subtitle: 'Prepare the website and mobile app for launch.',
+        fallbackLines: ['Secure website address', 'GitHub, Vercel and domain checklist', 'Android APK checklist'],
+        transform: { lidAngle: 1.86, rotX: 0.09, rotY: 0.12, rotZ: 0, camZ: 4.4, camY: 0.82 },
+      },
+      {
+        id: 'summary',
+        badge: 'RIZMERN COURSE',
+        title: 'Build your next project with RizMern',
+        subtitle: 'A practical path from web foundations to mobile apps.',
+        fallbackLines: ['Course details and online class format', 'Instructor information', 'Free demo class invitation'],
+        transform: { lidAngle: 1.86, rotX: 0.04, rotY: 0, rotZ: 0, camZ: 4.25, camY: 0.78 },
+      },
+    ],
+    // The boot state is only shown at the very start while the lid opens.
+    bootTransform: { lidAngle: 0.18, rotX: 0.32, rotY: -0.42, rotZ: 0.05, camZ: 5.35, camY: 1.05 },
+    chipLabels: ['MERN + React Native', 'Learn with AI'],
+  },
 }
 
 export default THREE_CONFIG

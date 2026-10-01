@@ -179,6 +179,24 @@
   padding: 24px;
 }
 
+.laptop-fallback-screen-lines {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding-left: 19px;
+  color: #bac2d6;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.laptop-fallback-screen-lines li::marker {
+  color: #67e8f9;
+}
+
+.laptop-fallback-card .button {
+  margin-top: 12px;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 900px) {
   .scroll-laptop-container {
