@@ -1,4 +1,4 @@
-export const SITE_URL = (import.meta.env?.VITE_SITE_URL || 'https://www.rizmern.com').replace(/\/+$/, '')
+export const SITE_URL = (import.meta.env?.VITE_SITE_URL || 'https://www.rizmern.online').replace(/\/+$/, '')
 
 const whatsappNumber = '923179500901'
 
