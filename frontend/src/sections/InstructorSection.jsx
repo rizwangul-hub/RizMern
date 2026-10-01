@@ -17,11 +17,11 @@ export default function InstructorSection() {
             className="hm-portrait-placeholder"
             src={profileImage}
             alt={`${siteData.instructor}, ${siteData.instructorTitle}`}
-            width="155"
-            height="155"
+            width="240"
+            height="240"
             loading="lazy"
           />
-          <i className="hm-portrait-badge" aria-hidden="true"><Sparkles size={16} /></i>
+          <i className="hm-portrait-badge" aria-hidden="true"><Sparkles size={18} /></i>
           <span className="hm-portrait-caption"><BriefcaseBusiness size={14} /> {section.label}</span>
         </ScrollReveal>
         <ScrollReveal className="hm-instructor-copy" delay={0.12}>
