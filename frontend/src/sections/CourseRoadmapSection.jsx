@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowDown, Check, ChevronDown, Layers3 } from 'lucide-react'
+import Button from '../components/Button'
 import GlassCard from '../components/GlassCard'
 import ScrollReveal from '../components/ScrollReveal'
 import SectionTitle from '../components/SectionTitle'
@@ -56,6 +57,11 @@ export default function CourseRoadmapSection() {
             )
           })}
           <div className="ph-timeline-hint"><ArrowDown size={13} /> From foundations to projects you can share</div>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+            <Button to="/curriculum" variant="outline">
+              Explore Full Interactive Curriculum Breakdown &rarr;
+            </Button>
+          </div>
         </div>
       </div>
     </section>

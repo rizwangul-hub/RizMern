@@ -11,7 +11,10 @@ export default function InstructorCTASection() {
           <span className="eyebrow">LEARN WITH RIZWAN</span>
           <h2>{instructorPageData.finalCta}</h2>
           <p>Meet Rizwan and discover the course in a free demo class.</p>
-          <Button to="/demo">Join Free Demo Class <ArrowUpRight size={16} /></Button>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1.25rem' }}>
+            <Button to="/demo">Join Free Demo Class <ArrowUpRight size={16} /></Button>
+            <Button to="/course" variant="outline">View Full Course Details</Button>
+          </div>
         </div>
       </ScrollReveal>
     </section>

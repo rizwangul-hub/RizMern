@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /student
 Disallow: /thank-you
 
 Sitemap: https://www.rizmern.online/sitemap.xml

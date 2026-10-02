@@ -18,12 +18,13 @@ export function CurriculumPage() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Course',
-    name: 'RizMern 3-Month MERN Stack & React Native Curriculum',
+    name: 'MERN Stack Course Syllabus & Curriculum Breakdown',
     description:
-      'Detailed curriculum covering HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, REST APIs, Authentication, React Native, Git, and Cloud Deployment.',
+      'Explore the complete MERN Stack course syllabus: HTML, CSS, JavaScript, React, Node.js, Express.js, MongoDB, React Native, and AI workflows with real practical projects.',
     provider: {
-      '@type': 'Organization',
+      '@type': 'EducationalOrganization',
       name: 'RizMern',
+      url: 'https://www.rizmern.online/',
     },
     educationalCredentialAwarded: 'Course Completion Certificate & Portfolio',
     timeRequired: 'P3M',
@@ -32,10 +33,10 @@ export function CurriculumPage() {
   return (
     <div className="curriculum-page-wrap">
       <SEO
-        title="RizMern Curriculum | MERN Stack, React Native & AI-Assisted Development"
-        description="Explore the comprehensive 3-month RizMern syllabus: HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, REST APIs, React Native, GitHub, and Deployment."
+        title="MERN Stack Course Syllabus & Curriculum Breakdown | RizMern"
+        description="Explore the complete MERN Stack course syllabus: HTML, CSS, JavaScript, React, Node.js, Express.js, MongoDB, React Native, and AI workflows with real practical projects."
         path="/curriculum"
-        structuredData={structuredData}
+        structuredData={[structuredData]}
       />
 
       <div className="app-container" style={{ paddingTop: 'var(--space-8)' }}>
@@ -45,7 +46,7 @@ export function CurriculumPage() {
             <Badge variant="purple">3-Month In-Depth Syllabus</Badge>
           </div>
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 'var(--space-3)' }}>
-            Full-Stack Web &amp; Mobile <br />
+            MERN Stack Course Syllabus &amp; <br />
             <span className="gradient-text">Interactive Curriculum Breakdown</span>
           </h1>
           <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>

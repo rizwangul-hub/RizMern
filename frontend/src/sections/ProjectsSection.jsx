@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Database, GraduationCap, PanelsTopLeft, Smartphone } from 'lucide-react'
+import Button from '../components/Button'
 import GlassCard from '../components/GlassCard'
 import ScrollReveal from '../components/ScrollReveal'
 import SectionTitle from '../components/SectionTitle'
@@ -57,6 +58,11 @@ export default function ProjectsSection() {
             </motion.div>
           )
         })}
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+        <Button to="/projects" variant="outline">
+          Explore All Real-World Projects &rarr;
+        </Button>
       </div>
     </section>
   )

@@ -14,6 +14,11 @@ const personSchema = {
   name: siteData.instructor,
   jobTitle: siteData.instructorTitle,
   url: `${siteData.siteUrl}/instructor`,
+  worksFor: {
+    '@type': 'EducationalOrganization',
+    name: siteData.brand,
+    url: `${siteData.siteUrl}/`,
+  },
   sameAs: socialLinks.filter(({ icon }) => ['linkedin', 'github', 'tiktok'].includes(icon)).map(({ href }) => href),
 }
 
@@ -21,8 +26,8 @@ export default function InstructorPage() {
   return (
     <>
       <SEO
-        title="Rizwan Ullah | MERN and React Native Instructor"
-        description="Meet Rizwan Ullah, a MERN Stack and React Native developer teaching practical full stack development with AI."
+        title="Rizwan Ullah - MERN Stack & React Native Instructor | RizMern"
+        description="Meet Rizwan Ullah, full stack web developer and instructor teaching MERN Stack, React Native, and AI-assisted workflows through practical live projects."
         path="/instructor"
         structuredData={[personSchema]}
       />

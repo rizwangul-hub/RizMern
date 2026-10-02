@@ -5,11 +5,13 @@ import BackgroundEffects from '../components/BackgroundEffects'
 import Breadcrumbs from '../components/Breadcrumbs'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import ScrollManager from '../components/ScrollManager'
 import WhatsAppButton from '../components/WhatsAppButton'
 
 export default function SiteLayout() {
   return (
     <>
+      <ScrollManager />
       <BackgroundEffects />
       <Analytics />
       <Navbar />

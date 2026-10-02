@@ -52,7 +52,12 @@ export function StudentLoginPage() {
 
   return (
     <div className="student-login-wrapper">
-      <SEO title="Student Portal Login | RizMern LMS" noIndex={true} />
+      <SEO
+        title="Student Portal Login | RizMern"
+        description="Private student portal login for enrolled RizMern course participants."
+        path="/student/login"
+        noindex={true}
+      />
 
       <div className="student-login-card">
         {/* Brand Header */}

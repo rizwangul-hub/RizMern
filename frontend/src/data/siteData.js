@@ -124,9 +124,9 @@ export const coursePageData = {
 }
 
 export const pricingPageData = {
-  metaTitle: 'Course Fee & Admission | RizMern',
-  metaDescription: 'Review RizMern course fees, included learning support, payment placeholders, and the admission steps.',
-  title: 'Course Fee and Admission Details',
+  metaTitle: 'MERN Stack Course Fees & Admission Plans | RizMern',
+  metaDescription: 'Review MERN Stack course fees, flexible payment plans, and admission details for the 3-month online full-stack web and mobile development course at RizMern.',
+  title: 'MERN Stack Course Fees & Admission Details',
   regularPrice: siteData.price,
   discountedPrice: '',
   paymentNote: 'One-time payment. Payment details will be shared after admission confirmation.',
@@ -197,10 +197,10 @@ export const instructorPageData = {
 
 export const homePageData = {
   hero: {
-    title: 'Learn MERN Stack & React Native App Development with AI',
-    titlePrefix: 'Learn MERN Stack & React Native App Development',
-    titleAccent: 'with AI',
-    description: 'Build and launch full stack websites and mobile apps in 3 months, step by step with Rizwan Ullah.',
+    title: 'Learn Full Stack Web Development with AI in 3 Months',
+    titlePrefix: 'Learn Full Stack Web Development with AI',
+    titleAccent: 'in 3 Months',
+    description: 'Master MERN stack, React Native, and AI-assisted workflows in Pakistan. Build and launch live full-stack websites and mobile apps step by step with Rizwan Ullah.',
     eyebrow: 'Learn by building, step by step',
     typingPrefix: 'Learn to build',
     demoButton: 'Join Free Demo Class',

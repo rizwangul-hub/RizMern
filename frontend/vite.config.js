@@ -1,3 +1,7 @@
+if (!process.env.RAYON_NUM_THREADS) {
+  process.env.RAYON_NUM_THREADS = '2'
+}
+
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 

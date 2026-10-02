@@ -31,12 +31,11 @@ export default function Footer() {
         </div>
         <div className="footer-nav">
           <h3>Explore</h3>
-          {navigationLinks.slice(0, 5).map((item) => (
+          {navigationLinks.map((item) => (
             <Link key={item.label} to={item.href}>{item.label}</Link>
           ))}
           <Link to="/blog">Development blog</Link>
           <Link to="/demo">Free demo class</Link>
-          <Link to="/admin/login">Admin portal</Link>
         </div>
         <div className="footer-contact">
           <h3>Let&apos;s build your next chapter</h3>

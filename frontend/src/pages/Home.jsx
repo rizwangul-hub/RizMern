@@ -13,7 +13,28 @@ import GlobeSection from '../components/three/GlobeSection'
 import TeachingSection from '../sections/TeachingSection'
 import SEO from '../components/SEO'
 import HomeSeoText from '../components/HomeSeoText'
-import { homePageData } from '../data/siteData'
+import { homePageData, siteData } from '../data/siteData'
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Full Stack Web Development Course in Pakistan with AI',
+  description: 'Learn MERN stack, React Native, and AI-assisted development in Pakistan in a practical 3-month online course with Rizwan Ullah.',
+  provider: {
+    '@type': 'EducationalOrganization',
+    name: siteData.brand,
+    url: `${siteData.siteUrl}/`,
+  },
+  educationalCredentialAwarded: 'Course Completion Certificate & Portfolio',
+  timeRequired: 'P3M',
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'online',
+    courseWorkload: 'P3M',
+    duration: 'P3M',
+    location: { '@type': 'VirtualLocation', url: `${siteData.siteUrl}/demo` },
+  },
+}
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -29,10 +50,10 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="MERN Stack & React Native Course with AI | RizMern"
-        description="Learn MERN stack, React Native, and AI-assisted web development in a practical 3-month online course with Rizwan Ullah."
+        title="Full Stack Web Development Course in Pakistan | RizMern"
+        description="Master full stack web development in Pakistan with our 3-month online course. Learn MERN Stack, React Native, and AI-assisted development through practical live projects."
         path="/"
-        structuredData={[faqSchema]}
+        structuredData={[courseSchema, faqSchema]}
       />
       <HeroSection />
       <StatsSection />

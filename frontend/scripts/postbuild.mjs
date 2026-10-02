@@ -21,6 +21,8 @@ const viteCli = join(root, 'node_modules', 'vite', 'bin', 'vite.js')
 const routes = [
   '/',
   '/course',
+  '/curriculum',
+  '/projects',
   '/pricing',
   '/instructor',
   '/demo',
@@ -99,7 +101,7 @@ h1,h2,h3{font-family:Poppins,Inter,Arial,sans-serif}
 
 function sitemapXml() {
   const urls = routes.filter((route) => route !== '/thank-you').map((route) => {
-    const priority = route === '/' ? '1.0' : route === '/blog' ? '0.8' : '0.7'
+    const priority = route === '/' ? '1.0' : ['/course', '/curriculum', '/projects', '/pricing', '/demo', '/instructor'].includes(route) ? '0.9' : route === '/blog' ? '0.8' : '0.7'
     const frequency = route.startsWith('/blog/') ? 'monthly' : 'weekly'
     return `  <url><loc>${siteUrl}${route}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod><changefreq>${frequency}</changefreq><priority>${priority}</priority></url>`
   })
@@ -107,7 +109,7 @@ function sitemapXml() {
 }
 
 function robotsTxt() {
-  return `User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /thank-you\n\nSitemap: ${siteUrl}/sitemap.xml\n`
+  return `User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /student\nDisallow: /thank-you\n\nSitemap: ${siteUrl}/sitemap.xml\n`
 }
 
 async function waitForServer(child) {
@@ -219,7 +221,7 @@ async function prerender() {
       try {
         const routeUrl = route === '/' ? origin : `${origin}${route}/`
         await page.goto(routeUrl, { waitUntil: 'domcontentloaded' })
-        await page.waitForSelector('h1', { timeout: 20000 })
+        await page.waitForSelector('h1', { timeout: 35000 })
         await page.addStyleTag({ content: '*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:0s!important}' })
         const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight)
         for (let y = 0; y < pageHeight; y += 700) {
@@ -269,5 +271,6 @@ try {
   logProgress('Postbuild prerender completed.')
 } catch (error) {
   process.stderr.write(`[postbuild] Failed: ${error.stack || error.message}\n`)
+  if (error.cause) process.stderr.write(`[postbuild] Cause: ${error.cause.stack || error.cause.message}\n`)
   process.exitCode = 1
 }

@@ -44,8 +44,8 @@ export default function CoursePage() {
   return (
     <>
       <SEO
-        title="Online MERN Stack Course in Pakistan | RizMern"
-        description="Learn full stack development with AI in this beginner-friendly online MERN stack and React Native course in Pakistan."
+        title="3 Month Online Web Development Course | RizMern"
+        description="Join our comprehensive 3-month online MERN stack and React Native course with AI in Pakistan. Build full-stack web and mobile apps with live instructor guidance."
         path="/course"
         structuredData={[courseSchema]}
       />

@@ -22,8 +22,8 @@ export default function PricingPage() {
   return (
     <>
       <SEO
-        title="MERN Course Fee and Admission | RizMern"
-        description="Review the online MERN Stack course fee, payment options, admission steps, and course inclusions at RizMern."
+        title="MERN Stack Course Fees & Admission Plans | RizMern"
+        description="Review MERN Stack course fees, flexible payment plans, and admission details for the 3-month online full-stack web and mobile development course at RizMern."
         path="/pricing"
         structuredData={[faqSchema]}
       />

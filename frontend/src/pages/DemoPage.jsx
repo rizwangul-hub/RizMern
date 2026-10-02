@@ -11,15 +11,15 @@ export default function DemoPage() {
   return (
     <>
       <SEO
-        title="Free MERN Course Demo Class Online | RizMern"
-        description="Join a free online demo class to explore the MERN Stack, React Native, and AI-assisted development course at RizMern."
+        title="Free Demo Class Registration | MERN Stack Course | RizMern"
+        description="Register for a free live online demo class of the 3-month MERN Stack and React Native course. Experience the AI-assisted coding workflow before enrolling."
         path="/demo"
       />
       <section className="form-page page-container" aria-labelledby="demo-page-title">
         <ScrollReveal className="form-page-heading">
           <span className="eyebrow"><span className="live-dot" /> ONLINE · FREE · BEGINNER FRIENDLY</span>
-          <h1 id="demo-page-title">Join the Free Demo Class</h1>
-          <p>Meet {siteData.instructor}, explore the course, and see how you can start building real projects.</p>
+          <h1 id="demo-page-title">Free Demo Class Registration</h1>
+          <p>Register for a free live demo session with {siteData.instructor}. Explore the MERN stack curriculum, see live AI-assisted development, and ask your questions directly.</p>
         </ScrollReveal>
         <div className="demo-page-layout">
           <ScrollReveal>
