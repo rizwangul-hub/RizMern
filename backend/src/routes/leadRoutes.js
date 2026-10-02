@@ -18,6 +18,8 @@ const createLeadValidation = [
     .withMessage('Enter a valid Pakistani phone number, such as 03XXXXXXXXX or +923XXXXXXXXX.')
     .customSanitizer((value) => normalizePakistaniPhone(value)),
   body('email').trim().isEmail().withMessage('Enter a valid email address.').bail().normalizeEmail(),
+  body('preferredDay').optional().trim().stripLow().escape().isLength({ max: 120 }),
+  body('preferredTime').optional().trim().stripLow().escape().isLength({ max: 120 }),
   body('source').optional().trim().stripLow().escape().isLength({ max: 80 }).withMessage('Source must be 80 characters or fewer.'),
 ]
 
@@ -49,6 +51,8 @@ router.patch(
   requireAdmin,
   param('id').isMongoId().withMessage('Lead ID is invalid.'),
   body('status').optional().isIn(leadStatuses).withMessage('Status is invalid.'),
+  body('preferredDay').optional().isString().trim().stripLow().escape().isLength({ max: 120 }),
+  body('preferredTime').optional().isString().trim().stripLow().escape().isLength({ max: 120 }),
   body('notes').optional().isString().withMessage('Notes must be text.').bail().trim().stripLow().escape().isLength({ max: 2000 }).withMessage('Notes must be 2000 characters or fewer.'),
   validateRequest,
   (req, res, next) => {

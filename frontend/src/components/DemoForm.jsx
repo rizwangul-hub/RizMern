@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { ArrowUpRight, LoaderCircle, Mail, MessageCircle, Phone, UserRound } from 'lucide-react'
+import { ArrowUpRight, Calendar, Clock3, LoaderCircle, Mail, MessageCircle, Phone, UserRound } from 'lucide-react'
 import { homePageData, siteData } from '../data/siteData'
 import { createLead } from '../services/leadService'
 import WhatsAppButton from './WhatsAppButton'
@@ -34,6 +34,8 @@ export default function DemoForm({ compact = false }) {
       name: String(formData.get('name') || '').trim(),
       phone: normalizePakistaniPhone(String(formData.get('phone') || '')),
       email: String(formData.get('email') || '').trim(),
+      preferredDay: String(formData.get('preferredDay') || 'Any day (Flexible)').trim(),
+      preferredTime: String(formData.get('preferredTime') || 'Evening (7:00 PM – 9:00 PM)').trim(),
     }
     const validation = {}
     if (!payload.name) validation.name = 'Enter your name.'
@@ -82,6 +84,40 @@ export default function DemoForm({ compact = false }) {
         <span className={`hm-input-wrap ${errors.email ? 'hm-input-wrap--error' : ''}`}><Mail size={16} aria-hidden="true" /><input name="email" type="email" placeholder="you@example.com" autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby="demo-email-error" required /></span>
         {errors.email && <small className="hm-field-error" id="demo-email-error">{errors.email}</small>}
       </label>
+      <div className="hm-demo-schedule-grid">
+        <label>
+          <span>{demo.fields.preferredDay || 'Free Day / Days'}</span>
+          <span className="hm-input-wrap">
+            <Calendar size={16} aria-hidden="true" />
+            <select name="preferredDay" defaultValue="Any day (Flexible)">
+              <option value="Any day (Flexible)">Any day (Flexible)</option>
+              <option value="Weekends (Sat - Sun)">Weekends (Saturday &amp; Sunday)</option>
+              <option value="Weekdays (Mon - Fri)">Weekdays (Monday to Friday)</option>
+              <option value="Friday only">Friday only</option>
+              <option value="Saturday only">Saturday only</option>
+              <option value="Sunday only">Sunday only</option>
+              <option value="Monday only">Monday only</option>
+              <option value="Tuesday only">Tuesday only</option>
+              <option value="Wednesday only">Wednesday only</option>
+              <option value="Thursday only">Thursday only</option>
+            </select>
+          </span>
+        </label>
+        <label>
+          <span>{demo.fields.preferredTime || 'Free Time Slot'}</span>
+          <span className="hm-input-wrap">
+            <Clock3 size={16} aria-hidden="true" />
+            <select name="preferredTime" defaultValue="Evening (7:00 PM – 9:00 PM)">
+              <option value="Evening (7:00 PM – 9:00 PM)">Evening (7:00 PM – 9:00 PM)</option>
+              <option value="Night (9:00 PM – 11:00 PM)">Night (9:00 PM – 11:00 PM)</option>
+              <option value="Late Night (10:00 PM – 12:00 AM)">Late Night (10:00 PM – 12:00 AM)</option>
+              <option value="Afternoon (3:00 PM – 6:00 PM)">Afternoon (3:00 PM – 6:00 PM)</option>
+              <option value="Morning (10:00 AM – 1:00 PM)">Morning (10:00 AM – 1:00 PM)</option>
+              <option value="Any time (Flexible)">Any time (Flexible)</option>
+            </select>
+          </span>
+        </label>
+      </div>
       <label className="form-honeypot" aria-hidden="true" tabIndex="-1">
         Website
         <input name="website" type="text" tabIndex="-1" autoComplete="off" />

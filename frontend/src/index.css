@@ -906,4 +906,33 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   .hm-portrait-ring--outer, .hm-portrait-ring--inner, .stats-3d-ring { animation: none !important; }
 }
 
+/* Demo class schedule selection */
+.hm-demo-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 580px) {
+  .hm-demo-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.hm-input-wrap select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 0;
+  border: 0;
+  outline: 0;
+  color: #f2efff;
+  background: transparent;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+.hm-input-wrap select option {
+  background: #111322;
+  color: #f2efff;
+}
+
+
 

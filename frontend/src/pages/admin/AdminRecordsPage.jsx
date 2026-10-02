@@ -14,8 +14,8 @@ const pageConfigs = {
     description: 'Review and follow up with learners registered for a demo class.',
     nameKey: 'name',
     statuses: leadStatuses,
-    columns: ['name', 'phone', 'email', 'status', 'createdAt'],
-    detailFields: [['Phone', 'phone'], ['Email', 'email'], ['Source', 'source'], ['Registered', 'createdAt']],
+    columns: ['name', 'phone', 'preferredDay', 'preferredTime', 'status', 'createdAt'],
+    detailFields: [['Phone', 'phone'], ['Email', 'email'], ['Free day', 'preferredDay'], ['Free time', 'preferredTime'], ['Source', 'source'], ['Registered', 'createdAt']],
     filePrefix: 'rizmern-demo-leads',
   },
   admissions: {
@@ -46,7 +46,11 @@ function phoneLink(phone) {
 function whatsappUrl(record, nameKey) {
   const number = phoneLink(record.phone)
   const name = record[nameKey] || 'there'
-  return `https://wa.me/${number}?text=${encodeURIComponent(`Hello ${name}, this is RizMern regarding your ${nameKey === 'name' ? 'demo class registration' : 'course admission request'}.`)}`
+  if (nameKey === 'name') {
+    const timeInfo = record.preferredDay || record.preferredTime ? ` (Free: ${record.preferredDay || 'Flexible'}, ${record.preferredTime || 'Flexible'})` : ''
+    return `https://wa.me/${number}?text=${encodeURIComponent(`Hello ${name}, this is Rizwan from RizMern regarding your demo class registration${timeInfo}.`)}`
+  }
+  return `https://wa.me/${number}?text=${encodeURIComponent(`Hello ${name}, this is RizMern regarding your course admission request.`)}`
 }
 
 function escapeCsv(value) {
@@ -56,7 +60,7 @@ function escapeCsv(value) {
 
 function downloadCsv(records, type) {
   const columns = type === 'leads'
-    ? [['Name', 'name'], ['Phone', 'phone'], ['Email', 'email'], ['Status', 'status'], ['Date', 'createdAt'], ['Notes', 'notes']]
+    ? [['Name', 'name'], ['Phone', 'phone'], ['Email', 'email'], ['Free Day', 'preferredDay'], ['Free Time', 'preferredTime'], ['Status', 'status'], ['Date', 'createdAt'], ['Notes', 'notes']]
     : [['Full Name', 'fullName'], ['Phone', 'phone'], ['Email', 'email'], ['City', 'city'], ['Payment Plan', 'paymentPlan'], ['Status', 'status'], ['Date', 'createdAt'], ['Notes', 'notes']]
   const csv = [columns.map(([label]) => escapeCsv(label)).join(','), ...records.map((record) => columns.map(([, key]) => escapeCsv(key === 'createdAt' ? formatDate(record[key]) : record[key])).join(','))].join('\r\n')
   const url = URL.createObjectURL(new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' }))
@@ -217,7 +221,18 @@ export default function AdminRecordsPage({ type }) {
   }
 
   const columns = useMemo(() => config.columns.map((key) => {
-    const labels = { name: 'Name', fullName: 'Full Name', phone: 'Phone', email: 'Email', city: 'City', paymentPlan: 'Payment Plan', status: 'Status', createdAt: 'Date' }
+    const labels = {
+      name: 'Name',
+      fullName: 'Full Name',
+      phone: 'Phone',
+      email: 'Email',
+      preferredDay: 'Free Day',
+      preferredTime: 'Free Time',
+      city: 'City',
+      paymentPlan: 'Payment Plan',
+      status: 'Status',
+      createdAt: 'Date',
+    }
     return {
       key,
       label: labels[key],

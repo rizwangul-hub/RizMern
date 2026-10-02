@@ -332,6 +332,8 @@ export const homePageData = {
       name: 'Name',
       phone: 'Phone Number',
       email: 'Email',
+      preferredDay: 'Which day(s) are you free?',
+      preferredTime: 'Which time are you free?',
     },
     submitLabel: 'Reserve My Free Seat',
     successMessage: 'Thanks for your interest! Your details are ready, and we’ll be in touch soon.',
