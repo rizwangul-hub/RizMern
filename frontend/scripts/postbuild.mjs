@@ -109,7 +109,7 @@ h1,h2,h3{font-family:Poppins,Inter,Arial,sans-serif}
 
 function sitemapXml() {
   const urls = routes.filter((route) => route !== '/thank-you').map((route) => {
-    const priority = route === '/' ? '1.0' : ['/course', '/curriculum', '/projects', '/pricing', '/demo', '/instructor'].includes(route) ? '0.9' : route === '/blog' ? '0.8' : '0.7'
+    const highPriority = ['/services', '/services/web-development', '/services/app-development', '/services/graphic-design', '/services/business-software', '/solutions', '/about', '/contact', '/projects', '/course', '/curriculum', '/pricing', '/demo', '/instructor']; const priority = route === '/' ? '1.0' : highPriority.includes(route) ? '0.9' : route === '/blog' ? '0.8' : '0.7'
     const frequency = route.startsWith('/blog/') ? 'monthly' : 'weekly'
     return `  <url><loc>${siteUrl}${route}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod><changefreq>${frequency}</changefreq><priority>${priority}</priority></url>`
   })

@@ -30,18 +30,62 @@ function breadcrumbSchema(path, lastLabel) {
 function organizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': ['SoftwareCompany', 'LocalBusiness', 'ProfessionalService'],
     '@id': `${siteData.siteUrl}/#business`,
-    description: 'Software company in Bahria Town, Lahore providing web development, mobile apps, graphic design, and custom business software.',
-    telephone: `+${siteData.whatsappNumber}`,
+    name: 'RizMern Software Company',
+    alternateName: siteData.brand,
+    legalName: 'RizMern Software Company',
+    description: 'Premier software company based in Bahria Town, Lahore. We design and develop custom business software (Property Dealer CRM, Restaurant POS, Expense Tracker, Pizza Shop system), MERN stack web development, React Native mobile apps, and graphic designing.',
+    telephone: '+923179500901',
     email: siteData.email,
     image: absoluteUrl('/og-image.png'),
-    address: { '@type': 'PostalAddress', streetAddress: 'Bahria Town', addressLocality: 'Lahore', addressRegion: 'Punjab', addressCountry: 'PK' },
-    areaServed: { '@type': 'City', name: 'Lahore' },
-    name: siteData.brand,
     url: absoluteUrl('/'),
     logo: absoluteUrl('/rizmern-icon.svg'),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Bahria Town',
+      addressLocality: 'Lahore',
+      addressRegion: 'Punjab',
+      postalCode: '53720',
+      addressCountry: 'PK',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 31.3685,
+      longitude: 74.1804,
+    },
+    hasMap: 'https://www.google.com/maps/search/?api=1&query=Bahria+Town+Lahore+Pakistan',
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '09:00',
+        closes: '19:00',
+      },
+    ],
+    priceRange: 'PKR',
+    currenciesAccepted: 'PKR, USD',
+    paymentAccepted: 'Cash, Bank Transfer, EasyPaisa, JazzCash',
+    areaServed: [
+      { '@type': 'Place', name: 'Bahria Town Lahore' },
+      { '@type': 'City', name: 'Lahore' },
+      { '@type': 'AdministrativeArea', name: 'Punjab' },
+      { '@type': 'Country', name: 'Pakistan' },
+    ],
     sameAs: socialLinks.filter(({ icon }) => ['linkedin', 'github', 'youtube', 'tiktok'].includes(icon)).map(({ href }) => href),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'RizMern Software & Digital Services',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Web Development (MERN Stack)' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile App Development (React Native iOS & Android)' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Graphic Designing & Branding' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Property Dealer & Real Estate Management Software' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Pizza Shop Management & POS Software' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Restaurant Management & Table Billing POS Software' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business Expense Tracker & Accounting Software' } },
+      ],
+    },
   }
 }
 

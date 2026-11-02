@@ -405,8 +405,10 @@ export const navigationLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Business Software', href: '/solutions' },
+  { label: 'Work', href: '/projects' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Academy', href: '/course' },
 ]
 
 export const socialLinks = [

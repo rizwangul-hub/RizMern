@@ -13,8 +13,8 @@ export default function Navbar() {
   return (
     <header className="site-header">
       <nav className="navbar page-container" aria-label="Main navigation">
-        <Link className="brand" to="/" aria-label="RizMern home">
-          <img src={logo} alt="RizMern" className="brand-logo" />
+        <Link className="brand" to="/" aria-label="RizMern software company">
+          <img src={logo} alt="RizMern Software Company" className="brand-logo" />
         </Link>
         <div className="nav-links">
           {navigationLinks.map((link) => (
@@ -29,7 +29,6 @@ export default function Navbar() {
           ))}
         </div>
         <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-
           <Button to="/contact" className="nav-cta">
             Get a quote <ArrowUpRight size={15} />
           </Button>
@@ -45,15 +44,19 @@ export default function Navbar() {
         </button>
       </nav>
       {isOpen && (
-          <div className="mobile-menu">
-            {navigationLinks.map((link) => (
-              <NavLink key={link.label} to={link.href} onClick={() => setIsOpen(false)}>
-                {link.label}
-              </NavLink>
-            ))}
-
-            <Button to="/contact" onClick={() => setIsOpen(false)}>Get a quote <ArrowUpRight size={15} /></Button>
-          </div>
+        <div className="mobile-menu">
+          {navigationLinks.map((link) => (
+            <NavLink key={link.label} to={link.href} onClick={() => setIsOpen(false)}>
+              {link.label}
+            </NavLink>
+          ))}
+          <NavLink to="/student/login" onClick={() => setIsOpen(false)} style={{ color: '#d8b4fe', fontSize: '13px' }}>
+            🎓 Student Portal
+          </NavLink>
+          <Button to="/contact" onClick={() => setIsOpen(false)}>
+            Get a quote <ArrowUpRight size={15} />
+          </Button>
+        </div>
       )}
     </header>
   )
