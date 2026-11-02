@@ -177,8 +177,6 @@ export default function CompanyPage({ page = 'home', serviceSlug }) {
         )}
       </section>
 
-      {isHome && <PortfolioSection />}
-
       {/* STATS STRIP */}
       {isHome && (
         <div className="page-container">
@@ -267,7 +265,7 @@ export default function CompanyPage({ page = 'home', serviceSlug }) {
       )}
 
       {/* PURPOSE-BUILT BUSINESS SOFTWARE SECTION */}
-      {(isHome || page === 'solutions') && (
+      {page === 'solutions' && (
         <section className="company-section company-solutions" id="solutions">
           <div className="page-container">
             <div className="company-section-heading">
