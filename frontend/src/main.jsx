@@ -12,6 +12,17 @@ import '@fontsource/poppins/latin-800.css'
 import './index.css'
 import App from './App.jsx'
 
+// Silence upstream deprecation warning between Three.js r186 and @react-three/fiber until Fiber updates to THREE.Timer
+if (typeof window !== 'undefined') {
+  const origWarn = console.warn
+  console.warn = (...args) => {
+    if (typeof args[0] === 'string' && args[0].includes('THREE.Clock: This module has been deprecated')) {
+      return
+    }
+    origWarn.apply(console, args)
+  }
+}
+
 const root = document.getElementById('root')
 const application = (
   <StrictMode>
