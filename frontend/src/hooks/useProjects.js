@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getPublicProjects } from '../services/projectService'
+import { initialProjects } from '../data/projectsData'
 
 export default function useProjects() {
-  const [projects, setProjects] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [projects, setProjects] = useState(initialProjects)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [attempt, setAttempt] = useState(0)
 
@@ -12,10 +13,15 @@ export default function useProjects() {
 
     getPublicProjects()
       .then((items) => {
-        if (active) setProjects(items)
+        if (active && Array.isArray(items) && items.length > 0) {
+          setProjects(items)
+        }
       })
       .catch((requestError) => {
-        if (active) setError(requestError.message)
+        // Keep initialProjects fallback without throwing error banner
+        if (active && (!projects || projects.length === 0)) {
+          setProjects(initialProjects)
+        }
       })
       .finally(() => {
         if (active) setLoading(false)
@@ -29,5 +35,6 @@ export default function useProjects() {
     setError('')
     setAttempt((value) => value + 1)
   }, [])
+
   return { projects, loading, error, retry }
 }

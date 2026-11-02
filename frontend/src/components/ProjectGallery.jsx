@@ -18,7 +18,7 @@ export default function ProjectGallery({ projects, loading, error, onRetry, onSe
 
   return (
     <div className="work-grid">
-      {projects.map((project) => <ProjectCard key={project._id || project.slug} project={project} onSelect={onSelect} />)}
+      {projects.map((project) => <ProjectCard key={project._id || project.slug || project.title} project={project} onSelect={onSelect} />)}
     </div>
   )
 }

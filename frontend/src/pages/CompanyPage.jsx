@@ -1,3 +1,5 @@
+import CompanyShowcase from '../components/CompanyShowcase'
+import PortfolioSection from '../sections/PortfolioSection'
 import { ArrowRight, ArrowUpRight, Check, Code2, Database, Layers, MapPin, Monitor, Phone, ShieldCheck, Smartphone, Sparkles, UtensilsCrossed, Building2, Pizza, Receipt, Wallet, Users } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
@@ -125,8 +127,8 @@ export default function CompanyPage({ page = 'home', serviceSlug }) {
               Discuss your project <ArrowUpRight size={17} />
             </Button>
             {isHome && (
-              <Button to="/solutions" variant="outline">
-                View Business Software <ArrowRight size={16} />
+              <Button href="#work" variant="outline">
+                Explore Our Work <ArrowRight size={16} />
               </Button>
             )}
             {!isHome && (
@@ -157,35 +159,7 @@ export default function CompanyPage({ page = 'home', serviceSlug }) {
 
         {/* Workspace Visual Card */}
         {isHome ? (
-          <div className="company-workspace" aria-label="RizMern Business Software Workspace">
-            <div className="workspace-top">
-              <span className="live-dot" /> RIZMERN / BUSINESS SOFTWARE WORKSPACE <Code2 size={17} />
-            </div>
-            <div className="workspace-body">
-              <span className="eyebrow">BAHRIA TOWN, LAHORE</span>
-              <h2>
-                Tailored for your business. <br />
-                <span className="gradient-text">Zero messy spreadsheets.</span>
-              </h2>
-              <div className="workspace-grid">
-                {solutions.map((item, i) => {
-                  const Icon = solutionIcons[item.id] || Database
-                  return (
-                    <div key={item.name}>
-                      <span>
-                        0{i + 1} • <Icon size={13} style={{ display: 'inline', verticalAlign: 'middle' }} />
-                      </span>
-                      <strong>{item.name}</strong>
-                      <small>{item.tags}</small>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className="workspace-status">
-                <Check size={16} /> Fast, Secure & Built for Everyday Use in Pakistan
-              </div>
-            </div>
-          </div>
+          <CompanyShowcase />
         ) : (
           <aside className="company-side">
             <span className="eyebrow">YOUR LOCAL DEVELOPMENT PARTNER</span>
@@ -202,6 +176,8 @@ export default function CompanyPage({ page = 'home', serviceSlug }) {
           </aside>
         )}
       </section>
+
+      {isHome && <PortfolioSection />}
 
       {/* STATS STRIP */}
       {isHome && (
