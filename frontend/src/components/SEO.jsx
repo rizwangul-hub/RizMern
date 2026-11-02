@@ -30,7 +30,14 @@ function breadcrumbSchema(path, lastLabel) {
 function organizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'EducationalOrganization',
+    '@type': 'ProfessionalService',
+    '@id': `${siteData.siteUrl}/#business`,
+    description: 'Software company in Bahria Town, Lahore providing web development, mobile apps, graphic design, and custom business software.',
+    telephone: `+${siteData.whatsappNumber}`,
+    email: siteData.email,
+    image: absoluteUrl('/og-image.png'),
+    address: { '@type': 'PostalAddress', streetAddress: 'Bahria Town', addressLocality: 'Lahore', addressRegion: 'Punjab', addressCountry: 'PK' },
+    areaServed: { '@type': 'City', name: 'Lahore' },
     name: siteData.brand,
     url: absoluteUrl('/'),
     logo: absoluteUrl('/rizmern-icon.svg'),

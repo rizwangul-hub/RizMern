@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 import { StudentAuthProvider } from './context/StudentAuthContext'
 
+const CompanyPage = lazy(() => import('./pages/CompanyPage'))
 const Home = lazy(() => import('./pages/Home'))
 const CoursePage = lazy(() => import('./pages/CoursePage'))
 const CurriculumPage = lazy(() => import('./pages/CurriculumPage'))
@@ -81,6 +82,8 @@ export default function App() {
               <Routes>
                 <Route element={<SiteLayout />}>
                   <Route index element={<Home />} />
+                  {['services', 'solutions', 'about', 'contact'].map(page => <Route key={page} path={page} element={<CompanyPage page={page} />} />)}
+                  {['web-development', 'app-development', 'graphic-design', 'business-software'].map(slug => <Route key={slug} path={`services/${slug}`} element={<CompanyPage page="services" serviceSlug={slug} />} />)}
                   <Route path="course" element={<CoursePage />} />
                   <Route path="curriculum" element={<CurriculumPage />} />
                   <Route path="pricing" element={<PricingPage />} />

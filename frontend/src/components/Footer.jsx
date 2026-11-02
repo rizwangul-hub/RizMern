@@ -20,7 +20,7 @@ export default function Footer() {
           <Link className="brand" to="/">
             <img src={logo} alt="RizMern" className="brand-logo" />
           </Link>
-          <p>Build real-world web and mobile products with a learning path that takes you from curious beginner to confident developer.</p>
+          <p>Web development, mobile apps, graphic design, and custom business software. Based in Bahria Town, Lahore, Pakistan.</p>
           <div className="social-links">
             {socialLinks.map((item) => (
               <a key={item.label} href={item.href} aria-label={item.label} {...externalLinkProps}>
@@ -35,18 +35,18 @@ export default function Footer() {
             <Link key={item.label} to={item.href}>{item.label}</Link>
           ))}
           <Link to="/blog">Development blog</Link>
-          <Link to="/demo">Free demo class</Link>
+          <Link to="/student/login">Student portal</Link>
         </div>
         <div className="footer-contact">
-          <h3>Let&apos;s build your next chapter</h3>
-          <p>Questions about the course? We&apos;re one message away.</p>
+          <h3>Let&apos;s build your next project</h3>
+          <p>Have a business idea? We&apos;re one message away.</p>
           <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
         </div>
       </div>
       <div className="page-container footer-bottom">
-        <span>&copy; {siteData.brand} - {siteData.instructor}</span>
+        <span>&copy; {new Date().getFullYear()} {siteData.brand}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <span>Made for the next generation of builders</span>
+          <span>Bahria Town, Lahore, Pakistan</span>
           <Link to="/admin/login" style={{ color: '#64748b', fontSize: '11px', textDecoration: 'none' }} title="Admin Login">
             🔒 Admin
           </Link>

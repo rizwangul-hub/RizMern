@@ -23,7 +23,7 @@ export const siteData = {
   whatsappNumber,
   whatsappLink: `https://wa.me/${whatsappNumber}`,
   whatsappGroupLink: 'https://chat.whatsapp.com/Hg61usPuMv25DW9cJKK0dR?s=cl&p=a&mlu=4&ilr=4&iam=0',
-  whatsappPrefilledMessage: 'Hello Rizwan, I want to know about the MERN course',
+  whatsappPrefilledMessage: 'Hello RizMern, I would like to discuss a website, app, design, or business software project.',
   email: 'mernstack2426@gmail.com',
   timings: 'TBA',
 }
@@ -403,13 +403,10 @@ export const thankYouData = {
 
 export const navigationLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Course', href: '/course' },
-  { label: 'Curriculum', href: '/curriculum' },
-  { label: 'My Work', href: '/projects' },
-  { label: 'Roadmap', href: '/#roadmap' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Instructor', href: '/instructor' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Services', href: '/services' },
+  { label: 'Business Software', href: '/solutions' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export const socialLinks = [
@@ -417,5 +414,4 @@ export const socialLinks = [
   { label: 'WhatsApp', href: siteData.whatsappLink, icon: 'whatsapp' },
   { label: 'GitHub', href: instructorPageData.githubUrl, icon: 'github' },
   { label: 'TikTok', href: 'https://www.tiktok.com/@mernstackdeveloper', icon: 'tiktok' },
-  { label: 'YouTube', href: 'https://www.youtube.com/', icon: 'youtube' },
 ]

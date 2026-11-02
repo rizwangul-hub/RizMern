@@ -20,6 +20,14 @@ const origin = `http://127.0.0.1:${port}`
 const viteCli = join(root, 'node_modules', 'vite', 'bin', 'vite.js')
 const routes = [
   '/',
+  '/services',
+  '/services/web-development',
+  '/services/app-development',
+  '/services/graphic-design',
+  '/services/business-software',
+  '/solutions',
+  '/about',
+  '/contact',
   '/course',
   '/curriculum',
   '/projects',
@@ -263,8 +271,6 @@ try {
   await mkdir(dist, { recursive: true })
   const sitemap = sitemapXml()
   const robots = robotsTxt()
-  await writeFile(join(root, 'public', 'sitemap.xml'), sitemap)
-  await writeFile(join(root, 'public', 'robots.txt'), robots)
   await writeFile(join(dist, 'sitemap.xml'), sitemap)
   await writeFile(join(dist, 'robots.txt'), robots)
   await prerender()

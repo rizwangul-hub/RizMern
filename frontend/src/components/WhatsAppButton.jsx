@@ -11,7 +11,7 @@ export default function WhatsAppButton({
   const href = groupMode
     ? siteData.whatsappGroupLink
     : `${siteData.whatsappLink}${siteData.whatsappLink.includes('?') ? '&' : '?'}text=${encodeURIComponent(siteData.whatsappPrefilledMessage)}`
-  const accessibleLabel = label || (groupMode ? 'Join the RizMern WhatsApp group' : 'Chat with Rizwan on WhatsApp')
+  const accessibleLabel = label || (groupMode ? 'Join the RizMern WhatsApp group' : 'Chat with RizMern on WhatsApp')
 
   return (
     <a

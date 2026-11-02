@@ -29,11 +29,9 @@ export default function Navbar() {
           ))}
         </div>
         <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Link to="/student/login" className="student-portal-btn">
-            🎓 Student Portal
-          </Link>
-          <Button to="/demo" className="nav-cta">
-            Join Free Demo Class <ArrowUpRight size={15} />
+
+          <Button to="/contact" className="nav-cta">
+            Get a quote <ArrowUpRight size={15} />
           </Button>
         </div>
         <button
@@ -53,10 +51,8 @@ export default function Navbar() {
                 {link.label}
               </NavLink>
             ))}
-            <NavLink to="/student/login" onClick={() => setIsOpen(false)} style={{ color: '#d8b4fe', fontWeight: 600 }}>
-              🎓 Student Portal
-            </NavLink>
-            <Button to="/demo" onClick={() => setIsOpen(false)}>Join Free Demo Class <ArrowUpRight size={15} /></Button>
+
+            <Button to="/contact" onClick={() => setIsOpen(false)}>Get a quote <ArrowUpRight size={15} /></Button>
           </div>
       )}
     </header>
