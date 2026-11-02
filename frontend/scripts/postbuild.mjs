@@ -1,6 +1,6 @@
 import { access, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { constants } from 'node:fs'
-import { spawn } from 'node:child_process'
+import { execSync, spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -260,7 +260,22 @@ async function prerender() {
     if (failures.length) throw new Error(`Browser errors during prerender:\n${failures.join('\n')}`)
     logProgress(`Prerendered ${routes.length} routes successfully.`)
   } finally {
-    if (browser) await browser.close()
+    if (browser) {
+      try {
+        const proc = browser.process()
+        const pid = proc?.pid
+        await browser.close()
+        if (pid) {
+          try {
+            if (process.platform === 'win32') {
+              execSync(`taskkill /pid ${pid} /T /F`, { stdio: 'ignore' })
+            } else if (!proc.killed) {
+              proc.kill('SIGKILL')
+            }
+          } catch {}
+        }
+      } catch {}
+    }
     server.kill()
     await rm(userDataDir, { recursive: true, force: true })
   }

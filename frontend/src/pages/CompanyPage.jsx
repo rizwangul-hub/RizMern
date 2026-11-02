@@ -207,6 +207,9 @@ export default function CompanyPage({ page = 'home', serviceSlug }) {
         </div>
       )}
 
+      {/* FEATURED WORK & PORTFOLIO SECTION */}
+      {isHome && <PortfolioSection />}
+
       {/* CORE SERVICES SECTION */}
       {(isHome || page === 'services' || service) && (
         <section className="company-section page-container" id="services">

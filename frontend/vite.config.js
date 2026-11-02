@@ -1,6 +1,5 @@
-if (!process.env.RAYON_NUM_THREADS) {
-  process.env.RAYON_NUM_THREADS = '2'
-}
+process.env.RAYON_NUM_THREADS = '1'
+process.env.UV_THREADPOOL_SIZE = '1'
 
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
